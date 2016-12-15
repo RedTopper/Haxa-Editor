@@ -15,6 +15,7 @@ import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -92,77 +93,83 @@ public class Pattern extends JFrame{
 				level.setVisible(true);
 			}
 		});
-		JPattern patternCanvis = new JPattern(level, this);
 		
 		JPanel leftConfig = Util.startFrame(new GridLayout(0,1));
 		
 		JPanel wallList = Util.startFrame(new BorderLayout());
-		ListData selected = Util.addTitledListToPanel(wallList, BorderLayout.CENTER, "Walls", walls);
+		ListData jWALL = Util.addTitledListToPanel(wallList, BorderLayout.CENTER, "Walls", walls);
+		
+		JPanel wallListButtons = Util.startFrame(new GridLayout(1,0));
+		JButton jADDW = Util.addButtonToPanel(wallListButtons, BorderLayout.SOUTH, "Add Wall");
+		JButton jREMO = Util.addButtonToPanel(wallListButtons, BorderLayout.NORTH, "Remove Wall");
+		wallList.add(wallListButtons, BorderLayout.SOUTH);
 		
 		JPanel editBoxes = Util.startFrame(new GridLayout(0,1));
-		JTextField jdist = Util.addTitledFieldToPanel(editBoxes, null, "[int] Wall Distance", null);
-		addFocus(selected, patternCanvis, jdist, Wall.Set.DISTANCE);
-		JTextField jheig = Util.addTitledFieldToPanel(editBoxes, null, "[int] Wall Height", null);
-		addFocus(selected, patternCanvis, jheig, Wall.Set.HEIGHT);
-		JTextField jside = Util.addTitledFieldToPanel(editBoxes, null, "[int] Wall Side", null);
-		addFocus(selected, patternCanvis, jside, Wall.Set.SIDE);
-		JTextField jlvsd = Util.addTitledFieldToPanel(editBoxes, null, "[int] Pattern Shape", sidesRequired + "");
-		Util.addButtonToPanel(editBoxes, null, "Save Pattern", new ActionListener() {
+		JTextField jDIST = Util.addTitledFieldToPanel(editBoxes, null, "[int] Wall Distance", null);
+		JTextField jHEIG = Util.addTitledFieldToPanel(editBoxes, null, "[int] Wall Height", null);
+		JTextField jSIDE = Util.addTitledFieldToPanel(editBoxes, null, "[int] Wall Side", null);
+		JTextField jLVSD = Util.addTitledFieldToPanel(editBoxes, null, "[int] Pattern Shape", sidesRequired + "");
+		JButton jSAVE = Util.addButtonToPanel(editBoxes, null, "Save Pattern");
+		
+		JPattern patternCanvis = new JPattern(level, this);
+		
+		leftConfig.setPreferredSize(new Dimension(220,0));
+		leftConfig.add(wallList);
+		leftConfig.add(editBoxes);
+		add(leftConfig, BorderLayout.WEST);
+		add(patternCanvis, BorderLayout.CENTER);
+		
+		//Action Listeners
+		addFocus(jWALL, patternCanvis, jDIST, Wall.Set.DISTANCE);
+		addFocus(jWALL, patternCanvis, jHEIG, Wall.Set.HEIGHT);
+		addFocus(jWALL, patternCanvis, jSIDE, Wall.Set.SIDE);
+		jWALL.list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				int index = jWALL.list.getSelectedIndex();
+				if(index < 0) return; //Should not ever happen.
+				Wall wall = walls.get(index);
+				jDIST.setText((int)(wall.getDistance()) + "");
+				jHEIG.setText((int)(wall.getHeight()) + "");
+				jSIDE.setText((int)(wall.getSide()) + "");
+				patternCanvis.selectIndex(index);
+				patternCanvis.repaint();
+			}
+		});
+		jADDW.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				walls.add(new Wall());
+				Util.updateList(jWALL, walls);
+				patternCanvis.repaint();
+			}
+		});
+		jREMO.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int index = jWALL.list.getSelectedIndex();
+				if(index < 0) return;
+				walls.remove(index);
+				Util.updateList(jWALL, walls);
+				patternCanvis.repaint();
+			}
+		});
+		jSAVE.addActionListener( new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					sidesRequired 	= Integer.parseInt(jlvsd.getText());
+					sidesRequired 	= Integer.parseInt(jLVSD.getText());
 					int result = JOptionPane.showOptionDialog(Pattern.this, 
-						"Do you really want to save this information?\nThe current file will be backed up.", 
-						"Really save?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, 
-						null, JOptionPane.YES_OPTION);
+						Util.SAVE_QUESTION_MESSAGE, Util.SAVE_QUESTION_TITLE, JOptionPane.YES_NO_OPTION, 
+						JOptionPane.QUESTION_MESSAGE, null, null, JOptionPane.YES_OPTION);
 					if(result != JOptionPane.YES_OPTION) return;
 					writeFile();
 					JOptionPane.showMessageDialog(Pattern.this, 
-						"Wrote the file to your hard drive successfully!", 
-						"Success!", JOptionPane.INFORMATION_MESSAGE);
+						Util.SAVE_SUCCESS_MESSAGE, Util.SAVE_SUCCESS_TITLE, JOptionPane.INFORMATION_MESSAGE);
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(Pattern.this, 
-						"Error updating the level!\nCheck console for details.", 
-						"Error!", JOptionPane.ERROR_MESSAGE);
+						Util.SAVE_FAIL_MESSAGE, Util.SAVE_FAIL_TITLE, JOptionPane.ERROR_MESSAGE);
 					ex.printStackTrace();
 				}
 			}
 		});
 		
-		Util.addButtonToPanel(wallList, BorderLayout.NORTH, "Remove Wall", new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int index = selected.list.getSelectedIndex();
-				if(index < 0) return;
-				walls.remove(index);
-				Util.updateList(selected, walls);
-				patternCanvis.repaint();
-			}
-		});
-		selected.list.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				int index = selected.list.getSelectedIndex();
-				if(index < 0) return; //Should not ever happen.
-				Wall wall = walls.get(index);
-				jdist.setText((int)(wall.getDistance()) + "");
-				jheig.setText((int)(wall.getHeight()) + "");
-				jside.setText((int)(wall.getSide()) + "");
-				patternCanvis.selectIndex(index);
-				patternCanvis.repaint();
-			}
-		});
-		Util.addButtonToPanel(wallList, BorderLayout.SOUTH, "Add Wall", new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				walls.add(new Wall());
-				Util.updateList(selected, walls);
-				patternCanvis.repaint();
-			}
-		});
-		
-		leftConfig.setPreferredSize(new Dimension(200,0));
-		leftConfig.add(wallList);
-		leftConfig.add(editBoxes);
-		add(leftConfig, BorderLayout.WEST);
-		add(patternCanvis, BorderLayout.CENTER);
 		pack();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -176,6 +183,10 @@ public class Pattern extends JFrame{
 	
 	public Wall[] getWalls() { 
 		return walls.toArray(new Wall[0]);
+	}
+	
+	public int getSides() {
+		return sidesRequired;
 	}
 
 	private void loadWalls(ByteBuffer patternRawData) {

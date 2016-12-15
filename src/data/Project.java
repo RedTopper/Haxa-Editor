@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -36,11 +37,13 @@ public class Project extends JFrame{
 	}
 	
 	public void edit() {
-		JPanel contents = new JPanel();
-		contents.setLayout(new BorderLayout());
-		contents.setBackground(Util.BACKGROUND);
+		JPanel contents = Util.startFrame(new BorderLayout());
 		list = Util.addTitledListToPanel(contents, BorderLayout.CENTER, "Available Levels", levels);
-		Util.addButtonToPanel(contents, BorderLayout.NORTH, "Create new level", new ActionListener() {
+		JButton jCREA = Util.addButtonToPanel(contents, BorderLayout.NORTH, "Create new level");
+		JButton jEDIT = Util.addButtonToPanel(contents, BorderLayout.SOUTH, "Edit selected level");
+		add(contents);
+		
+		jCREA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String name = JOptionPane.showInputDialog(Project.this, 
 					"What do you want to call this level?", 
@@ -50,7 +53,7 @@ public class Project extends JFrame{
 				new Level(Project.this, name.trim()).edit();
 			}
 		});
-		Util.addButtonToPanel(contents, BorderLayout.SOUTH, "Edit selected level", new ActionListener() {
+		jEDIT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = list.list.getSelectedIndex();
 				if(index < 0) return;
@@ -58,7 +61,7 @@ public class Project extends JFrame{
 				levels.get(index).edit();
 			}
 		});
-		add(contents);
+		
 		pack();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);

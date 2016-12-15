@@ -39,12 +39,22 @@ public final class Util {
 	public static final int COLOR_BYTE_LENGTH = 3; // Each color takes up 1 byte;
 	public static final String OLD = File.separator + "backup";
 	public static final Color BACKGROUND = new Color(245, 245, 245);
+	public static final String SAVE_QUESTION_TITLE = "Really save?";
+	public static final String SAVE_QUESTION_MESSAGE = "Do you really want to save this information?\n"
+													 + "(The current file will be backed up)";
+	public static final String SAVE_SUCCESS_TITLE = "Succcess!";
+	public static final String SAVE_SUCCESS_MESSAGE = "Wrote file successfully!";
+	public static final String SAVE_FAIL_TITLE = "Fail!";
+	public static final String SAVE_FAIL_MESSAGE = "Error writing the level!\n"
+												 + "Check the console for details.";
 	
+	
+
 	/**
-	 * Gets a folder based on a file object.
-	 * Creates one if it does not exist. Will quit the program on error.
-	 * @param folder The folder to create.
-	 * @return
+	 * Gets a directory. If it does not get the directory, it will create it
+	 * If it cannot edit the directory, then the program will quit.
+	 * @param folder The directory to read.
+	 * @return The proper folder.
 	 */
 	public static File getDir(File folder) {
 		if(!folder.exists()) {
@@ -62,13 +72,14 @@ public final class Util {
 		return folder;
 	}
 	
+
 	/**
-	 * Gets a list of files based on the FileType is a DIRECTORY or a FILE  
-	 * @param type Search for either FILES or DIRECTORIES in the passed folder.
-	 * @param dir The folder to look in.
-	 * @param foundMessage The message to print if at least one FILE/DIRECTORY is found
-	 * @param notFoundMessage The message to print if nothing is found.
-	 * @return
+	 * Gets the contents of a directory depending on the passed FileType
+	 * @param type Pass either FILE to get files, or DIR to get dirs.
+	 * @param dir The directory to search in.
+	 * @param foundMessage The message to display in the console when files/dirs are found.
+	 * @param notFoundMessage The message to display in the console when files are not found.
+	 * @return An array list of either files or directories
 	 */
 	public static ArrayList<File> getDirContents(FileType type, File dir, String foundMessage, String notFoundMessage) {
 		boolean foundPath = false;
@@ -91,7 +102,7 @@ public final class Util {
 	
 	/**
 	 * Checks to make sure that a string in the file appears
-	 * (Useful for checking the header of the file)
+	 * (Useful for checking the header or footer of the file)
 	 * @param data Raw data to check
 	 * @param s The string to compare (will read as many bytes as passed string)
 	 * @throws IOException
@@ -107,7 +118,7 @@ public final class Util {
 	}
 	
 	/**
-	 * Reads a null terminated string from the file.
+	 * Reads a sized, dynamic string from the file.
 	 * @param data Raw data
 	 * @return A string.
 	 * @throws IOException
@@ -123,9 +134,9 @@ public final class Util {
 	}
 
 	/**
-	 * Gets a color from the file.
+	 * Reads a list of colors from the file.
 	 * @param data Raw data.
-	 * @return A color representation (3 bytes required)
+	 * @return An array list of read colors.
 	 * @throws IOException
 	 * @throws BufferUnderflowException
 	 */
@@ -138,6 +149,12 @@ public final class Util {
 		return colors;
 	}
 
+	/**
+	 * Opens a binary file for reading.
+	 * @param file The file  to open
+	 * @return A  binary ByteBuffer representing the whole file.
+	 * @throws IOException
+	 */
 	public static ByteBuffer readBinaryFile(File file) throws IOException {
 		FileInputStream inputStream = new FileInputStream(file);
 		FileChannel channel = inputStream.getChannel();
@@ -149,58 +166,91 @@ public final class Util {
 		return rawData;
 	}
 	
+	/**
+	 * Creates and colors a new panel.
+	 * @param manager The layout of the panel to create.
+	 * @return A new panel.
+	 */
+	public static JPanel startFrame(LayoutManager manager) {
+		JPanel frame = new JPanel();
+		frame.setBackground(BACKGROUND);
+		frame.setLayout(manager);
+		return frame;
+	}
+
+	/**
+	 * Adds a text box to a panel surrounded with a border  that has words.
+	 * @param panel The panel to attach the field to.
+	 * @param constraints Constraints for the panel.
+	 * @param title The title of the panel.
+	 * @param defaultText The default text to insert into the panel.
+	 * @return The text field  added, with an action listener to auto select text when clicked in.
+	 */
 	public static JTextField addTitledFieldToPanel(JPanel panel, Object constraints, String title, String defaultText) {
 		JTextField text = new JTextField(defaultText);
 		text.setBorder(BorderFactory.createTitledBorder(title));
 		text.setBackground(BACKGROUND);
 		panel.add(text, constraints);
+		
 		text.addFocusListener(new FocusListener() {
 			public void focusGained(FocusEvent e) {
 				text.selectAll();
 			}
 			public void focusLost(FocusEvent e) {}
 		});
+		
 		return text;
 	}
 	
+	/**
+	 * Adds a titled list to a panel.
+	 * @param panel The panel to add the list to.
+	 * @param constraints The constraints of the list.
+	 * @param title The title to put around the list
+	 * @param list The list of data to add to the panel (must have a toString method)!
+	 * @return The added list and model.
+	 */
 	public static ListData addTitledListToPanel(JPanel panel, Object constraints, String title, ArrayList<?> list) {
 		DefaultListModel<String> model = new DefaultListModel<>();
 		for(Object o : list) {
 			model.addElement(o.toString());
 		}
 		JList<String> internal = new JList<>(model);
-		internal.setBorder(BorderFactory.createTitledBorder(title));
-		internal.setBackground(BACKGROUND);
 		JScrollPane scroller = new JScrollPane(internal);
 		scroller.setBorder(BorderFactory.createEmptyBorder());
+		internal.setBorder(BorderFactory.createTitledBorder(title));
+		internal.setBackground(BACKGROUND);
 		panel.add(scroller, constraints);
 		return new ListData(model, internal);
 	}
 	
-	public static void addButtonToPanel(JPanel panel, Object constraints, String text, ActionListener action) {
+	/**
+	 * Adds a button to a panel.
+	 * @param panel The panel to  add the button to.
+	 * @param constraints The constraints of the button.
+	 * @param text The button text.
+	 * @return The created button.
+	 */
+	public static JButton addButtonToPanel(JPanel panel, Object constraints, String text) {
 		JButton button = new JButton(text);
 		button.setBackground(BACKGROUND);
-		button.addActionListener(action);
 		panel.add(button, constraints);
+		return button;
 	}
 	
-	public static String upperText(JTextField text) {
-		String str = text.getText().toUpperCase();
-		text.setText(str);
-		return str;
-	}
-
 	public static void createColorPicker(JPanel colors, ArrayList<Color> colorList, String name) {
-		JPanel sub = new JPanel();
-		sub.setLayout(new BorderLayout());
-		sub.setBackground(Util.BACKGROUND);
+		JPanel sub = startFrame(new BorderLayout());
 		ListData data = addTitledListToPanel(sub, BorderLayout.CENTER, name, colorList);
+		JPanel buttons = startFrame(new GridLayout(1, 0));
+		JButton jADDN = addButtonToPanel(buttons, null, "Add");
+		JButton jREMO = addButtonToPanel(buttons, null, "Remove");
+		JButton jEDIT = addButtonToPanel(buttons, null, "Edit");
+		sub.add(buttons, BorderLayout.SOUTH);
+		colors.add(sub);
+		
 		updateColorList(data, colorList);
 		
-		JPanel buttons = new JPanel();
-		buttons.setLayout(new GridLayout(1, 0));
-		buttons.setBackground(Util.BACKGROUND);
-		addButtonToPanel(buttons, null, "Add", new ActionListener() {
+		jADDN.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Color newColor = JColorChooser.showDialog(null, "Add new color for " + name, Color.WHITE);
 				if(newColor == null) return;
@@ -209,7 +259,7 @@ public final class Util {
 				updateColorList(data, colorList);
 			}
 		});
-		addButtonToPanel(buttons, null, "Remove", new ActionListener() {
+		jREMO.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int oldColor = data.list.getSelectedIndex();
 				if(oldColor < 0) return;
@@ -217,7 +267,7 @@ public final class Util {
 				updateColorList(data, colorList);
 			}
 		});
-		addButtonToPanel(buttons, null, "Edit", new ActionListener() {
+		jEDIT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int oldColor = data.list.getSelectedIndex();
 				if(oldColor < 0) return;
@@ -228,11 +278,8 @@ public final class Util {
 				updateColorList(data, colorList);
 			}
 		});
-		sub.add(buttons, BorderLayout.SOUTH);
-		
-		colors.add(sub);
 	}
-	
+
 	public static void updateColorList(ListData data, ArrayList<Color> colorList) {
 		int selected = data.list.getSelectedIndex();
 		int direction = colorList.size() - data.model.size();
@@ -248,17 +295,20 @@ public final class Util {
 		for(Object o : list) data.model.addElement(o.toString());
 		fixSelectedIndex(data, list, selected, direction);
 	}
+
+	public static String upperText(JTextField text) {
+		String str = text.getText().toUpperCase();
+		text.setText(str);
+		return str;
+	}
 	
+	public static String getText(JTextField text) {
+		return text.getText();
+	}
+
 	private static void fixSelectedIndex(ListData data, ArrayList<?> list, int selected, int difference) {
 		if(selected + difference < list.size()) {
 			data.list.setSelectedIndex((selected + difference >= 0 ? selected + difference : 0));
 		}
-	}
-	
-	public static JPanel startFrame(LayoutManager manager) {
-		JPanel frame = new JPanel();
-		frame.setBackground(BACKGROUND);
-		frame.setLayout(manager);
-		return frame;
 	}
 }

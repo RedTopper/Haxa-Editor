@@ -13,8 +13,8 @@ public class Wall {
 	}
 	
 	public Wall() {
-		this.distance = 20;
-		this.height = 4;
+		this.distance = 40;
+		this.height = 16;
 		this.side = 0;
 	}
 	

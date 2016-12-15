@@ -13,6 +13,7 @@ import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -152,50 +153,24 @@ public class Level extends JFrame {
 		
 		//BEGIN Left Side Textual Configuration
 		JPanel textConfiguration = Util.startFrame(new GridLayout(0,1));
-		JTextField jname = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Name", name);
-		JTextField jdiff = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Difficulty", difficulty);
-		JTextField jmode = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Mode", mode);
-		JTextField jcrea = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Creator", creator);
-		JTextField jmuse = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Music File + extension", music);
-		JTextField jwall = Util.addTitledFieldToPanel(textConfiguration, null, "[float] Wall Speed", wallSpeed + "");
-		JTextField jrota = Util.addTitledFieldToPanel(textConfiguration, null, "[TAU/float] Rotation Step", rotationSpeed + "");
-		JTextField jhuma = Util.addTitledFieldToPanel(textConfiguration, null, "[TAU/float] Human Step", humanSpeed + "");
-		JTextField jpuls = Util.addTitledFieldToPanel(textConfiguration, null, "[float] Pulse Speed", pulseSpeed + "");
-		Util.addButtonToPanel(textConfiguration, null, "Save Configuration", new  ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					name 			= Util.upperText(jname);
-					difficulty 		= Util.upperText(jdiff);
-					mode 			= Util.upperText(jmode);
-					creator 		= Util.upperText(jcrea);
-					music 			= jmuse.getText();
-					wallSpeed 		= Float.parseFloat(jwall.getText());
-					rotationSpeed 	= Float.parseFloat(jrota.getText());
-					humanSpeed 		= Float.parseFloat(jhuma.getText());
-					pulseSpeed 		= Float.parseFloat(jpuls.getText());
-					int result = JOptionPane.showOptionDialog(Level.this, 
-						"Do you really want to save this information?\nThe current file will be backed up.", 
-						"Really save?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, 
-						null, JOptionPane.YES_OPTION);
-					if(result != JOptionPane.YES_OPTION) return;
-					writeFile();
-					JOptionPane.showMessageDialog(Level.this, 
-						"Wrote the file to your hard drive successfully!", 
-						"Success!", JOptionPane.INFORMATION_MESSAGE);
-				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(Level.this, 
-						"Error updating the level!\nCheck console for details.", 
-						"Error!", JOptionPane.ERROR_MESSAGE);
-					ex.printStackTrace();
-				}
-			}
-		});
+		JTextField jNAME = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Name", name);
+		JTextField jDIFF = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Difficulty", difficulty);
+		JTextField jMODE = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Mode", mode);
+		JTextField jCREA = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Creator", creator);
+		JTextField jMUSE = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Music File + extension", music);
+		JTextField jWALL = Util.addTitledFieldToPanel(textConfiguration, null, "[float] Wall Speed", wallSpeed + "");
+		JTextField jROTA = Util.addTitledFieldToPanel(textConfiguration, null, "[TAU/float] Rotation Step", rotationSpeed + "");
+		JTextField jHUMA = Util.addTitledFieldToPanel(textConfiguration, null, "[TAU/float] Human Step", humanSpeed + "");
+		JTextField jPLUS = Util.addTitledFieldToPanel(textConfiguration, null, "[float] Pulse Speed", pulseSpeed + "");
+		JButton jSAVE = Util.addButtonToPanel(textConfiguration, null, "Save Configuration");
+		add(textConfiguration);
 		
 		//BEGIN Color Panel
 		JPanel colors = Util.startFrame(new GridLayout(0,1));
 		Util.createColorPicker(colors, bg1, "Background Primary");
 		Util.createColorPicker(colors, bg2, "Background Secondary");
 		Util.createColorPicker(colors, fg, "Foreground");
+		add(colors);
 		
 		//BEGIN Right Side pattern chooser
 		JPanel patternConfiguration = Util.startFrame(new GridLayout(0,1));
@@ -203,51 +178,81 @@ public class Level extends JFrame {
 		//BEGIN Top Pattern Selector
 		JPanel patternsAvailable = Util.startFrame(new BorderLayout());
 		jpatterns = Util.addTitledListToPanel(patternsAvailable, BorderLayout.CENTER, "Available Patterns", project.getPatterns());
+		JButton jPATT = Util.addButtonToPanel(patternsAvailable, BorderLayout.NORTH, "Create new pattern");
+		JButton jEDIT = Util.addButtonToPanel(patternsAvailable, BorderLayout.SOUTH, "Edit selected available pattern");
+		patternConfiguration.add(patternsAvailable);
 		
-		Util.addButtonToPanel(patternsAvailable, BorderLayout.NORTH, "Create new pattern", new  ActionListener() {
+		//BEGIN Bottom Level Patterns
+		JPanel patternLevel = Util.startFrame(new BorderLayout());
+		ListData jLEVE = Util.addTitledListToPanel(patternLevel, BorderLayout.CENTER, "Linked Patterns", patterns);
+		JButton jLINK = Util.addButtonToPanel(patternLevel, BorderLayout.NORTH, "Link available pattern to this level");
+		JButton jUNLK = Util.addButtonToPanel(patternLevel, BorderLayout.SOUTH,"Unlink pattern from this level");
+		patternConfiguration.add(patternLevel);
+		add(patternConfiguration);
+		
+		//Action Listeners
+		jSAVE.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					name 			= Util.upperText(jNAME);
+					difficulty 		= Util.upperText(jDIFF);
+					mode 			= Util.upperText(jMODE);
+					creator 		= Util.upperText(jCREA);
+					music 			= Util.getText(jMUSE);
+					wallSpeed 		= Float.parseFloat(jWALL.getText());
+					rotationSpeed 	= Float.parseFloat(jROTA.getText());
+					humanSpeed 		= Float.parseFloat(jHUMA.getText());
+					pulseSpeed 		= Float.parseFloat(jPLUS.getText());
+					int result = JOptionPane.showOptionDialog(Level.this, 
+						Util.SAVE_QUESTION_MESSAGE, Util.SAVE_QUESTION_TITLE, JOptionPane.YES_NO_OPTION, 
+						JOptionPane.QUESTION_MESSAGE, null, null, JOptionPane.YES_OPTION);
+					if(result != JOptionPane.YES_OPTION) return;
+					writeFile();
+					JOptionPane.showMessageDialog(Level.this, 
+						Util.SAVE_SUCCESS_MESSAGE, Util.SAVE_SUCCESS_TITLE, JOptionPane.INFORMATION_MESSAGE);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(Level.this, 
+						Util.SAVE_FAIL_MESSAGE, Util.SAVE_FAIL_TITLE, JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
+				}
+			}
+		});
+		jPATT.addActionListener(new  ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String patternName = JOptionPane.showInputDialog(Level.this, 
-						"What do you want to call this pattern?", 
-						"Pattern File Name", JOptionPane.QUESTION_MESSAGE);
-					if(patternName == null || patternName.length() == 0) return;
-					Level.this.setVisible(false);
+					"What do you want to call this pattern?", 
+					"Pattern File Name", JOptionPane.QUESTION_MESSAGE);
+				if(patternName == null || patternName.length() == 0) return;
+				Level.this.setVisible(false);
 				new Pattern(project, patternName).edit(Level.this);
 			}
 		});
-		Util.addButtonToPanel(patternsAvailable, BorderLayout.SOUTH, "Edit selected available pattern", new  ActionListener() {
+		jEDIT.addActionListener(new  ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selection = jpatterns.list.getSelectedIndex();
 				if(selection < 0) return;
+				Level.this.setVisible(false);
 				project.getPatterns().get(selection).edit(Level.this);;
 			}
 		});
-	
-		//BEGIN Bottom Level Patterns
-		JPanel patternLevel = Util.startFrame(new BorderLayout());
-		ListData jleve = Util.addTitledListToPanel(patternLevel, BorderLayout.CENTER, "Linked Patterns", patterns);
-		Util.addButtonToPanel(patternLevel, BorderLayout.NORTH, "Link available pattern to this level", new  ActionListener() {
+		jLINK.addActionListener(new  ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selection = jpatterns.list.getSelectedIndex();
 				if(selection < 0) return;
 				patterns.add(project.getPatterns().get(selection));
-				Util.updateList(jleve, patterns);
+				Util.updateList(jLEVE, patterns);
 			}
 		});
-		Util.addButtonToPanel(patternLevel, BorderLayout.SOUTH,"Unlink pattern from this level", new  ActionListener() {
+		jUNLK.addActionListener(new  ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int selection = jleve.list.getSelectedIndex();
+				int selection = jLEVE.list.getSelectedIndex();
 				if(selection < 0) return;
 				patterns.remove(selection);
-				Util.updateList(jleve, patterns);
+				Util.updateList(jLEVE, patterns);
 			}
 		});
-
+		
 		//bring window to life!
-		add(textConfiguration);
-		add(colors);
-		patternConfiguration.add(patternsAvailable);
-		patternConfiguration.add(patternLevel);
-		add(patternConfiguration);
 		pack();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);

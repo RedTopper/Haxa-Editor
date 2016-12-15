@@ -1,9 +1,12 @@
 package gfx;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Polygon;
+import java.awt.Stroke;
 
 import javax.swing.JPanel;
 
@@ -21,21 +24,53 @@ public class JPattern extends JPanel {
 	
 	public JPattern(Level level, Pattern pattern) {
 		super();
-        setPreferredSize(new Dimension(640,640));
+		setPreferredSize(new Dimension(640,640));
         this.pattern = pattern;
     }
 	
-	public void paintWall(Graphics g, Wall wall) {
+	public void paintWall(Graphics2D g, Wall wall, boolean hilight) {
+		
 		Polygon p = new Polygon();
-		p.addPoint(1,1);
-		if(selectedIndex > 0) return;
+		int centerx = getSize().width / 2;
+		int centery = getSize().height / 2;
+		int side = wall.getSide();
+		int height = wall.getHeight();
+		int dist = wall.getDistance();
+		double radians = ((double)side / (double)pattern.getSides()) * (Math.PI * 2);
+		double radians2 = (((double)side + 1) / (double)pattern.getSides()) * (Math.PI * 2);
+		p.addPoint((int)(Math.cos(radians) * (dist + height)) + centerx, 
+				   y((int)(Math.sin(radians) * (dist + height))) + centery);
+		p.addPoint((int)(Math.cos(radians2) * (dist + height)) + centerx, 
+				   y((int)(Math.sin(radians2) * (dist + height))) + centery);
+		p.addPoint((int)(Math.cos(radians2) * dist) + centerx, 
+				   y((int)(Math.sin(radians2) * dist)) + centery);
+		p.addPoint((int)(Math.cos(radians) * dist) + centerx, 
+				   y((int)(Math.sin(radians) * dist)) + centery);
+		g.setColor(Color.RED);
+		g.fillPolygon(p);
+		if(hilight) {
+			Stroke s = g.getStroke();
+			g.setStroke(new BasicStroke(2));
+			g.setColor(Color.BLACK);
+			g.drawPolygon(p);
+			g.setStroke(s);
+		}
 	}
 
-    public void paintComponent(Graphics g) {
+    private int y(int i) {
+		return i * -1;
+	}
+
+	public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, getPreferredSize().width, getPreferredSize().height);
-        for(Wall wall : pattern.getWalls()) paintWall(g, wall);
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.WHITE);
+        g2.fillRect(0, 0, getSize().width, getSize().height);
+        g2.setColor(Color.RED);
+        for(Wall wall : pattern.getWalls()) paintWall(g2, wall, false);
+        if(selectedIndex >= 0 && selectedIndex < pattern.getWalls().length) {
+        	paintWall(g2, pattern.getWalls()[selectedIndex], true);
+        }
     }
 
 	public void selectIndex(int index) {

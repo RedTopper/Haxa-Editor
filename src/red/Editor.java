@@ -8,7 +8,7 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import data.Project;
 
-public class LevelEditTwo {
+public class Editor {
 	public static String DIR_NAME = "hexlevels";
 	
 	public static void main(String[] args) {
