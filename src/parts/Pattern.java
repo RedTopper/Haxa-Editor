@@ -41,7 +41,7 @@ public class Pattern extends JFrame{
 	
 	//Locals
 	public final Project project;
-	public final File patternFile;
+	public final File file;
 
 	//Variables to write to file
 	private int sidesRequired;
@@ -50,14 +50,14 @@ public class Pattern extends JFrame{
 	public Pattern(Project project, String name) {
 		super("New pattern '" + name + "'");
 		this.project = project;
-		this.patternFile = new File(project.dir, DIR_NAME + File.separator + name + EXTENSION);
+		this.file = new File(project.dir, DIR_NAME + File.separator + name + EXTENSION);
 		this.sidesRequired = 6;
 	}
 	
 	public Pattern(Project project, File patternFile) throws IOException {
 		super("Pattern '" + patternFile.getName() + "'");
 		this.project = project;
-		this.patternFile = patternFile;
+		this.file = patternFile;
 		ByteBuffer patternRawData = Util.readBinaryFile(patternFile);
 		try {
 			Util.checkString(patternRawData, HEADER);
@@ -70,13 +70,11 @@ public class Pattern extends JFrame{
 		}
 	}
 	
-	public void writeFile() throws IOException {
-		Dynamic d = new Dynamic();
+	public void writeFile(Dynamic d) throws IOException {
 		d.putRawString(HEADER);
 		d.putByte(sidesRequired);
 		d.putWalls(walls);
 		d.putRawString(FOOTER);
-		d.write(patternFile);
 	}
 	
 	public void edit(Level level) {
@@ -159,7 +157,9 @@ public class Pattern extends JFrame{
 						Util.SAVE_QUESTION_MESSAGE, Util.SAVE_QUESTION_TITLE, JOptionPane.YES_NO_OPTION, 
 						JOptionPane.QUESTION_MESSAGE, null, null, JOptionPane.YES_OPTION);
 					if(result != JOptionPane.YES_OPTION) return;
-					writeFile();
+					Dynamic d = new Dynamic();
+					writeFile(d);
+					d.write(file);
 					JOptionPane.showMessageDialog(Pattern.this, 
 						Util.SAVE_SUCCESS_MESSAGE, Util.SAVE_SUCCESS_TITLE, JOptionPane.INFORMATION_MESSAGE);
 				} catch (Exception ex) {
@@ -178,7 +178,7 @@ public class Pattern extends JFrame{
 	}
 
 	public String toString() {
-		return patternFile.getName();
+		return file.getName();
 	}
 	
 	public Wall[] getWalls() { 

@@ -14,13 +14,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import parts.Pattern;
+import red.Dynamic;
 import red.ListData;
 import red.Util;
 
 @SuppressWarnings("serial")
 public class Project extends JFrame{
 	public static final String HEADER = "HAXAGON1.0";
-	public static final String EXTENSION = ".haxagon";
+	public static final String NAME = "levels.haxagon";
 	public final File dir;
 	
 	private ArrayList<Level> levels = null;
@@ -40,7 +41,10 @@ public class Project extends JFrame{
 		JPanel contents = Util.startFrame(new BorderLayout());
 		list = Util.addTitledListToPanel(contents, BorderLayout.CENTER, "Available Levels", levels);
 		JButton jCREA = Util.addButtonToPanel(contents, BorderLayout.NORTH, "Create new level");
-		JButton jEDIT = Util.addButtonToPanel(contents, BorderLayout.SOUTH, "Edit selected level");
+		JPanel buttons = Util.startFrame(new BorderLayout());
+		JButton jEDIT = Util.addButtonToPanel(buttons, BorderLayout.NORTH, "Edit selected level");
+		JButton jEXPO = Util.addButtonToPanel(buttons, BorderLayout.SOUTH, "Export all levels to game");
+		contents.add(buttons, BorderLayout.SOUTH);
 		add(contents);
 		
 		jCREA.addActionListener(new ActionListener() {
@@ -59,6 +63,31 @@ public class Project extends JFrame{
 				if(index < 0) return;
 				Project.this.setVisible(false);
 				levels.get(index).edit();
+			}
+		});
+		jEXPO.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int result = JOptionPane.showOptionDialog(Project.this, 
+						Util.SAVE_QUESTION_MESSAGE, Util.SAVE_QUESTION_TITLE, JOptionPane.YES_NO_OPTION, 
+						JOptionPane.QUESTION_MESSAGE, null, null, JOptionPane.YES_OPTION);
+					if(result != JOptionPane.YES_OPTION) return;
+					Dynamic d = new Dynamic();
+					d.putInt(patterns.size());
+					for(Pattern p : patterns) {
+						d.putString(p.toString());
+						p.writeFile(d);
+					}
+					d.putInt(levels.size());
+					for(Level l : levels) l.writeFile(d);
+					d.write(new File(new File(dir, ".." + File.separator), NAME));
+					JOptionPane.showMessageDialog(Project.this, 
+						Util.SAVE_SUCCESS_MESSAGE, Util.SAVE_SUCCESS_TITLE, JOptionPane.INFORMATION_MESSAGE);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(Project.this, 
+						Util.SAVE_FAIL_MESSAGE, Util.SAVE_FAIL_TITLE, JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
+				}
 			}
 		});
 		

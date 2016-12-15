@@ -112,8 +112,7 @@ public class Level extends JFrame {
 	 * Writes this object to a file.
 	 * @throws IOException
 	 */
-	public void writeFile() throws IOException {
-		Dynamic d = new Dynamic();
+	public void writeFile(Dynamic d) throws IOException {
 		d.putRawString(HEADER);
 		d.putString(name);
 		d.putString(difficulty);
@@ -130,7 +129,6 @@ public class Level extends JFrame {
 		d.putInt(patterns.size());
 		for(Pattern p : patterns) d.putString(p.toString());
 		d.putRawString(FOOTER);
-		d.write(file);
 	}
 
 	/**
@@ -207,7 +205,9 @@ public class Level extends JFrame {
 						Util.SAVE_QUESTION_MESSAGE, Util.SAVE_QUESTION_TITLE, JOptionPane.YES_NO_OPTION, 
 						JOptionPane.QUESTION_MESSAGE, null, null, JOptionPane.YES_OPTION);
 					if(result != JOptionPane.YES_OPTION) return;
-					writeFile();
+					Dynamic d = new Dynamic();
+					writeFile(d);
+					d.write(file);
 					JOptionPane.showMessageDialog(Level.this, 
 						Util.SAVE_SUCCESS_MESSAGE, Util.SAVE_SUCCESS_TITLE, JOptionPane.INFORMATION_MESSAGE);
 				} catch (Exception ex) {
