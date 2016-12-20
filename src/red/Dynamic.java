@@ -29,9 +29,9 @@ public class Dynamic {
 	}
 	
 	public void putColors(ArrayList<Color> c) {
-		ByteBuffer buf = ByteBuffer.allocate(c.size() * 3 + 1);
+		ByteBuffer buf = ByteBuffer.allocate(c.size() * 3 + 4);
 		buf.order(ByteOrder.LITTLE_ENDIAN);
-		buf.put((byte) c.size());
+		buf.putInt(c.size());
 		for(int i = 0; i < c.size(); i++) {
 			buf.put((byte) c.get(i).getRed());
 			buf.put((byte) c.get(i).getGreen());
@@ -41,18 +41,17 @@ public class Dynamic {
 	}
 	
 	public void putString(String string) {
-		if(string.length() >= 256) string = string.substring(0, 256);
-		ByteBuffer buf = ByteBuffer.allocate(string.length() + 1);
+		ByteBuffer buf = ByteBuffer.allocate(string.length() + 4);
 		buf.order(ByteOrder.LITTLE_ENDIAN);
-		buf.put((byte) string.length()); 		
+		buf.putInt(string.length()); 		
 		buf.put(string.getBytes());
 		buffers.add(buf);
 	}
 	
 	public void putWalls(ArrayList<Wall> walls) {
-		ByteBuffer buf = ByteBuffer.allocate(walls.size() * Wall.BYTE_LENGTH + 1);
+		ByteBuffer buf = ByteBuffer.allocate(walls.size() * Wall.BYTE_LENGTH + 4);
 		buf.order(ByteOrder.LITTLE_ENDIAN);
-		buf.put((byte) walls.size());
+		buf.putInt(walls.size());
 		for(Wall wall : walls) {
 			buf.putChar(wall.getDistance());
 			buf.putChar(wall.getHeight());
@@ -87,12 +86,4 @@ public class Dynamic {
 		outputStream.close();
 		System.out.println("Backed up and wrote file: '" + file.getAbsolutePath() + "'");
 	}
-
-	public void putByte(int i) {
-		ByteBuffer buf = ByteBuffer.allocate(1);
-		buf.order(ByteOrder.LITTLE_ENDIAN);
-		buf.put((byte)i);
-		buffers.add(buf);
-	}
-	
 }

@@ -201,18 +201,13 @@ public class Level extends JFrame {
 					rotationSpeed 	= Float.parseFloat(jROTA.getText());
 					humanSpeed 		= Float.parseFloat(jHUMA.getText());
 					pulseSpeed 		= Float.parseFloat(jPLUS.getText());
-					int result = JOptionPane.showOptionDialog(Level.this, 
-						Util.SAVE_QUESTION_MESSAGE, Util.SAVE_QUESTION_TITLE, JOptionPane.YES_NO_OPTION, 
-						JOptionPane.QUESTION_MESSAGE, null, null, JOptionPane.YES_OPTION);
-					if(result != JOptionPane.YES_OPTION) return;
+					if(Util.askSave(Level.this) != JOptionPane.YES_OPTION) return;
 					Dynamic d = new Dynamic();
 					writeFile(d);
 					d.write(file);
-					JOptionPane.showMessageDialog(Level.this, 
-						Util.SAVE_SUCCESS_MESSAGE, Util.SAVE_SUCCESS_TITLE, JOptionPane.INFORMATION_MESSAGE);
+					Util.showSuccess(Level.this);
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(Level.this, 
-						Util.SAVE_FAIL_MESSAGE, Util.SAVE_FAIL_TITLE, JOptionPane.ERROR_MESSAGE);
+					Util.showError(Level.this, ex.getMessage());
 					ex.printStackTrace();
 				}
 			}

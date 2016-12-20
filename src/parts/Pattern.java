@@ -61,7 +61,7 @@ public class Pattern extends JFrame{
 		ByteBuffer patternRawData = Util.readBinaryFile(patternFile);
 		try {
 			Util.checkString(patternRawData, HEADER);
-			this.sidesRequired = patternRawData.get() & 0xFF;
+			this.sidesRequired = patternRawData.getInt();
 			loadWalls(patternRawData);
 			Util.checkString(patternRawData, FOOTER);
 		} catch(BufferUnderflowException e) {
@@ -72,7 +72,7 @@ public class Pattern extends JFrame{
 	
 	public void writeFile(Dynamic d) throws IOException {
 		d.putRawString(HEADER);
-		d.putByte(sidesRequired);
+		d.putInt(sidesRequired);
 		d.putWalls(walls);
 		d.putRawString(FOOTER);
 	}
@@ -153,18 +153,13 @@ public class Pattern extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					sidesRequired 	= Integer.parseInt(jLVSD.getText());
-					int result = JOptionPane.showOptionDialog(Pattern.this, 
-						Util.SAVE_QUESTION_MESSAGE, Util.SAVE_QUESTION_TITLE, JOptionPane.YES_NO_OPTION, 
-						JOptionPane.QUESTION_MESSAGE, null, null, JOptionPane.YES_OPTION);
-					if(result != JOptionPane.YES_OPTION) return;
+					if(Util.askSave(Pattern.this) != JOptionPane.YES_OPTION) return;
 					Dynamic d = new Dynamic();
 					writeFile(d);
 					d.write(file);
-					JOptionPane.showMessageDialog(Pattern.this, 
-						Util.SAVE_SUCCESS_MESSAGE, Util.SAVE_SUCCESS_TITLE, JOptionPane.INFORMATION_MESSAGE);
+					Util.showSuccess(Pattern.this);
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(Pattern.this, 
-						Util.SAVE_FAIL_MESSAGE, Util.SAVE_FAIL_TITLE, JOptionPane.ERROR_MESSAGE);
+					Util.showError(Pattern.this, ex.getMessage());
 					ex.printStackTrace();
 				}
 			}
@@ -190,7 +185,7 @@ public class Pattern extends JFrame{
 	}
 
 	private void loadWalls(ByteBuffer patternRawData) {
-		int numberOfWalls = patternRawData.get() & 0xFF;
+		int numberOfWalls = patternRawData.getInt();
 		for(int i = 0; i < numberOfWalls; i++) {
 			walls.add(new Wall(patternRawData.getChar(), patternRawData.getChar(), patternRawData.getChar()));
 		}

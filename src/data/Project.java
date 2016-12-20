@@ -22,6 +22,7 @@ import red.Util;
 public class Project extends JFrame{
 	public static final String HEADER = "HAXAGON1.0";
 	public static final String NAME = "levels.haxagon";
+	public static final String FOOTER = "ENDHAXAGON";
 	public final File dir;
 	
 	private ArrayList<Level> levels = null;
@@ -68,11 +69,9 @@ public class Project extends JFrame{
 		jEXPO.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					int result = JOptionPane.showOptionDialog(Project.this, 
-						Util.SAVE_QUESTION_MESSAGE, Util.SAVE_QUESTION_TITLE, JOptionPane.YES_NO_OPTION, 
-						JOptionPane.QUESTION_MESSAGE, null, null, JOptionPane.YES_OPTION);
-					if(result != JOptionPane.YES_OPTION) return;
+					if(Util.askSave(Project.this) != JOptionPane.YES_OPTION) return;
 					Dynamic d = new Dynamic();
+					d.putRawString(HEADER);
 					d.putInt(patterns.size());
 					for(Pattern p : patterns) {
 						d.putString(p.toString());
@@ -80,12 +79,11 @@ public class Project extends JFrame{
 					}
 					d.putInt(levels.size());
 					for(Level l : levels) l.writeFile(d);
-					d.write(new File(new File(dir, ".." + File.separator), NAME));
-					JOptionPane.showMessageDialog(Project.this, 
-						Util.SAVE_SUCCESS_MESSAGE, Util.SAVE_SUCCESS_TITLE, JOptionPane.INFORMATION_MESSAGE);
+					d.putRawString(FOOTER);
+					d.write(new File(new File("."), NAME));
+					Util.showSuccess(Project.this);
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(Project.this, 
-						Util.SAVE_FAIL_MESSAGE, Util.SAVE_FAIL_TITLE, JOptionPane.ERROR_MESSAGE);
+					Util.showError(Project.this, ex.getMessage());
 					ex.printStackTrace();
 				}
 			}

@@ -21,7 +21,9 @@ import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
+import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -45,8 +47,7 @@ public final class Util {
 	public static final String SAVE_SUCCESS_TITLE = "Succcess!";
 	public static final String SAVE_SUCCESS_MESSAGE = "Wrote file successfully!";
 	public static final String SAVE_FAIL_TITLE = "Fail!";
-	public static final String SAVE_FAIL_MESSAGE = "Error writing the level!\n"
-												 + "Check the console for details.";
+	public static final String SAVE_FAIL_MESSAGE = "Error writing the level!";
 	
 	
 
@@ -125,7 +126,7 @@ public final class Util {
 	 * @throws BufferUnderflowException
 	 */
 	public static String readString(ByteBuffer data) throws IOException, BufferUnderflowException {
-		byte length = data.get();
+		int length = data.getInt();
 		StringBuilder string = new StringBuilder();
 		for(int i = 0; i < length; i++) {
 			string.append((char)data.get());
@@ -141,7 +142,7 @@ public final class Util {
 	 * @throws BufferUnderflowException
 	 */
 	public static ArrayList<Color> readColors(ByteBuffer data) throws IOException, BufferUnderflowException {
-		int length = data.get() & 0xFF;
+		int length = data.getInt();
 		ArrayList<Color> colors = new ArrayList<>();
 		for(int i = 0; i < length; i++) {
 			colors.add(new Color(data.get() & 0xFF, data.get() & 0xFF, data.get() & 0xFF));
@@ -306,6 +307,22 @@ public final class Util {
 		return text.getText();
 	}
 
+	public static int askSave(JFrame frame) {
+		return JOptionPane.showOptionDialog(frame, 
+				SAVE_QUESTION_MESSAGE, SAVE_QUESTION_TITLE, JOptionPane.YES_NO_OPTION, 
+				JOptionPane.QUESTION_MESSAGE, null, null, JOptionPane.YES_OPTION);
+	}
+	
+	public static void showSuccess(JFrame frame) {
+		JOptionPane.showMessageDialog(frame, 
+				SAVE_SUCCESS_MESSAGE, SAVE_SUCCESS_TITLE, JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public static void showError(JFrame frame, String message) {
+		JOptionPane.showMessageDialog(frame, 
+				SAVE_FAIL_MESSAGE + "\n" + message, SAVE_FAIL_TITLE, JOptionPane.ERROR_MESSAGE);
+	}
+	
 	private static void fixSelectedIndex(ListData data, ArrayList<?> list, int selected, int difference) {
 		if(selected + difference < list.size()) {
 			data.list.setSelectedIndex((selected + difference >= 0 ? selected + difference : 0));
