@@ -2,9 +2,10 @@ package parts;
 
 public class Wall {
 	public static final int BYTE_LENGTH = 3 * 2; //3 chars consisting of 2 bytes each
-	private char distance;
-	private char height;
-	private char side;
+	public static final int MIN_DISTANCE = 70;
+	private int distance;
+	private int height;
+	private int side;
 	
 	public enum Set {
 		DISTANCE,
@@ -13,39 +14,39 @@ public class Wall {
 	}
 	
 	public Wall() {
-		this.distance = 40;
+		this.distance = 0;
 		this.height = 16;
 		this.side = 0;
 	}
 	
-	public Wall(char distance, char height, char side) {
-		this.distance = distance;
+	public Wall(int distance, int height, int side) {
+		this.distance = distance - MIN_DISTANCE;
 		this.height = height;
 		this.side = side;
 	}
 	
 	public char getDistance() {
-		return distance;
+		return (char)(distance + MIN_DISTANCE);
 	}
 	
 	public char getHeight() {
-		return height;
+		return (char)height;
 	}
 	
 	public char getSide() {
-		return side;
+		return (char)side;
 	}
 	
 	public void setDistance(int dist) {
-		this.distance = (char)dist;
+		this.distance = dist;
 	}
 	
 	public void setHeight(int height) {
-		this.height = (char)height;
+		this.height = height;
 	}
 	
 	public void setSide(int side) {
-		this.side = (char)side;
+		this.side = side;
 	}
 	
 	public String toString() {

@@ -48,7 +48,7 @@ public class Level extends JFrame {
 	private float wallSpeed;
 	private float rotationSpeed;
 	private float humanSpeed;
-	private float pulseSpeed;
+	private int pulseSpeed;
 	private ArrayList<Pattern> patterns = new ArrayList<>();
 	
 	/**
@@ -72,7 +72,7 @@ public class Level extends JFrame {
 		this.wallSpeed = 2.0f;
 		this.rotationSpeed = (float)(Math.PI  * 2.0) / 120.0f;
 		this.humanSpeed = (float)(Math.PI  * 2.0) / 60.0f;
-		this.pulseSpeed = 10.0f;
+		this.pulseSpeed = 10;
 	}
 	
 	/**
@@ -99,7 +99,7 @@ public class Level extends JFrame {
 			this.wallSpeed = levelRawData.getFloat();
 			this.rotationSpeed = levelRawData.getFloat();
 			this.humanSpeed = levelRawData.getFloat();
-			this.pulseSpeed = levelRawData.getFloat();
+			this.pulseSpeed = levelRawData.getInt();
 			loadPatterns(levelRawData);
 			Util.checkString(levelRawData, FOOTER);
 		}  catch(BufferUnderflowException e) {
@@ -125,7 +125,7 @@ public class Level extends JFrame {
 		d.putFloat(wallSpeed);
 		d.putFloat(rotationSpeed);
 		d.putFloat(humanSpeed);
-		d.putFloat(pulseSpeed);
+		d.putInt(pulseSpeed);
 		d.putInt(patterns.size());
 		for(Pattern p : patterns) d.putString(p.toString());
 		d.putRawString(FOOTER);
@@ -200,7 +200,7 @@ public class Level extends JFrame {
 					wallSpeed 		= Float.parseFloat(jWALL.getText());
 					rotationSpeed 	= Float.parseFloat(jROTA.getText());
 					humanSpeed 		= Float.parseFloat(jHUMA.getText());
-					pulseSpeed 		= Float.parseFloat(jPLUS.getText());
+					pulseSpeed 		= Integer.parseInt(jPLUS.getText());
 					if(Util.askSave(Level.this) != JOptionPane.YES_OPTION) return;
 					Dynamic d = new Dynamic();
 					writeFile(d);
