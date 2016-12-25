@@ -126,7 +126,7 @@ public class Pattern extends JFrame{
 				int index = jWALL.list.getSelectedIndex();
 				if(index < 0) return; //Should not ever happen.
 				Wall wall = walls.get(index);
-				jDIST.setText((int)(wall.getDistance()) + "");
+				jDIST.setText((int)(wall.getDistance() - Wall.MIN_DISTANCE) + "");
 				jHEIG.setText((int)(wall.getHeight()) + "");
 				jSIDE.setText((int)(wall.getSide()) + "");
 				patternCanvis.selectIndex(index);

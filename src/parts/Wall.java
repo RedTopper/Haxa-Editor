@@ -2,7 +2,7 @@ package parts;
 
 public class Wall {
 	public static final int BYTE_LENGTH = 3 * 2; //3 chars consisting of 2 bytes each
-	public static final int MIN_DISTANCE = 70;
+	public static final int MIN_DISTANCE = 80;
 	private int distance;
 	private int height;
 	private int side;
