@@ -39,7 +39,7 @@ public class Pattern {
 	//Globals
 	public static final String DIR_NAME = "patterns";
 	public static final String XML_HEADER = "Pattern";
-	public static final String BIN_HEADER = "PTN1.0";
+	public static final String BIN_HEADER = "PTN1.1";
 	public static final String BIN_FOOTER = "ENDPTN";
 	
 	//Finals

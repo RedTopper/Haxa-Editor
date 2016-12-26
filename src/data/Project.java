@@ -12,16 +12,22 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import parts.Pattern;
 import red.Dynamic;
 import red.ListData;
 import red.Util;
+import red.UtilXML;
 
 public class Project {
-	public static final String BIN_HEADER = "HAX1.0";
+	public static final String BIN_HEADER = "HAX1.1";
 	public static final String BIN_FOOTER = "ENDHAX";
-	public static final String NAME = "levels.haxagon";
+	public static final String BIN_NAME = "levels.haxagon";
+	public static final String XML_NAME = "levels.xml";
 	public final File dir;
 	public final JFrame frame;
 	
@@ -70,6 +76,8 @@ public class Project {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if(Util.askSave(frame) != JOptionPane.YES_OPTION) return;
+					
+					//Write binary format
 					Dynamic d = new Dynamic();
 					d.putRawString(BIN_HEADER);
 					d.putInt(patterns.size());
@@ -80,7 +88,26 @@ public class Project {
 					d.putInt(levels.size());
 					for(Level l : levels) l.writeBIN(d);
 					d.putRawString(BIN_FOOTER);
-					d.write(new File(new File("."), NAME));
+					d.write(new File(new File("."), BIN_NAME));
+					
+					//Write XML format
+					Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+					Element root = doc.createElement("Export");
+					for(Pattern pattern : patterns) {
+						Element p = doc.createElement(Pattern.XML_HEADER);
+						p.setAttribute("filename", pattern.toString());
+						pattern.writeXML(p);
+						root.appendChild(p);
+					}
+					for(Level level : levels) {
+						Element l = doc.createElement(Level.XML_HEADER);
+						l.setAttribute("filename", level.toString());
+						level.writeXML(l);
+						root.appendChild(l);
+					}
+					doc.appendChild(root);
+					UtilXML.writeXML(new File(new File("."), XML_NAME), doc);
+					
 					Util.showSuccess(frame);
 				} catch (Exception ex) {
 					Util.showError(frame, ex.getMessage());

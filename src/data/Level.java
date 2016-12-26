@@ -33,8 +33,8 @@ public class Level {
 	
 	//Files
 	public static final String XML_HEADER = "Level";
-	public static final String BIN_HEADER = "LEVEL2.0";
-	public static final String BIN_FOOTER = "ENDLEVEL";
+	public static final String BIN_HEADER = "LEV2.1";
+	public static final String BIN_FOOTER = "ENDLEV";
 	
 	//Finals
 	public final Project project;
@@ -121,7 +121,7 @@ public class Level {
 		this.speedRotation 	= UtilXML.getFloat(e, XML_SPEED_ROTATION);
 		this.speedCursor	= UtilXML.getFloat(e, XML_SPEED_CURSOR);
 		this.speedPulse 	= UtilXML.getInt(e, XML_SPEED_PULSE);
-		patterns 			= getPatterns(e);
+		this.patterns 		= getPatterns(e);
 		this.bg1			= UtilXML.getColors(e, XML_BG1);
 		this.bg2			= UtilXML.getColors(e, XML_BG2);
 		this.fg				= UtilXML.getColors(e, XML_FG);

@@ -152,8 +152,10 @@ public class UtilXML {
 	}
 
 	public static void putWalls(Element root, List<Wall> walls) {
-		Element e = root.getOwnerDocument().createElement(Wall.XML_HEADER);
-		for(Wall w : walls) w.writeXML(e);
-		root.appendChild(e);
+		for(Wall w : walls) {
+			Element e = root.getOwnerDocument().createElement(Wall.XML_HEADER);
+			w.writeXML(e);
+			root.appendChild(e);
+		}
 	}
 }
