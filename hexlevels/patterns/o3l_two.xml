@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Pattern>
-  <SidesRequired>3</SidesRequired>
-  <Wall>
-    <Distance>-30</Distance>
-    <Height>32</Height>
-    <Side>0</Side>
-  </Wall>
-  <Wall>
-    <Distance>30</Distance>
-    <Height>32</Height>
-    <Side>0</Side>
-  </Wall>
+    <SidesRequired>3</SidesRequired>
+    <Wall>
+        <Distance>-30</Distance>
+        <Height>32</Height>
+        <Side>0</Side>
+    </Wall>
+    <Wall>
+        <Distance>30</Distance>
+        <Height>32</Height>
+        <Side>0</Side>
+    </Wall>
 </Pattern>
