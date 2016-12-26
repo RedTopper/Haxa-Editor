@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Pattern>
+  <SidesRequired>4</SidesRequired>
+  <Wall>
+    <Distance>0</Distance>
+    <Height>32</Height>
+    <Side>0</Side>
+  </Wall>
+  <Wall>
+    <Distance>0</Distance>
+    <Height>32</Height>
+    <Side>1</Side>
+  </Wall>
+  <Wall>
+    <Distance>0</Distance>
+    <Height>32</Height>
+    <Side>2</Side>
+  </Wall>
+</Pattern>

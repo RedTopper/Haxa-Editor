@@ -18,24 +18,24 @@ import red.Dynamic;
 import red.ListData;
 import red.Util;
 
-@SuppressWarnings("serial")
-public class Project extends JFrame{
-	public static final String HEADER = "HAXAGON1.0";
+public class Project {
+	public static final String BIN_HEADER = "HAX1.0";
+	public static final String BIN_FOOTER = "ENDHAX";
 	public static final String NAME = "levels.haxagon";
-	public static final String FOOTER = "ENDHAXAGON";
 	public final File dir;
+	public final JFrame frame;
 	
 	private ArrayList<Level> levels = null;
 	private ArrayList<Pattern> patterns = null;
 	private ListData list = null;
 	
 	public Project(File projectDir) {
-		super("Open Level");
+		frame = new JFrame("Open Level");
 		this.dir = projectDir;
 		loadPatterns();
 		loadLevels();
-		setMinimumSize(new Dimension(245, 350));
-		setLayout(new GridLayout(0,1));
+		frame.setMinimumSize(new Dimension(245, 350));
+		frame.setLayout(new GridLayout(0,1));
 	}
 	
 	public void edit() {
@@ -46,15 +46,15 @@ public class Project extends JFrame{
 		JButton jEDIT = Util.addButtonToPanel(buttons, BorderLayout.NORTH, "Edit selected level");
 		JButton jEXPO = Util.addButtonToPanel(buttons, BorderLayout.SOUTH, "Export all levels to game");
 		contents.add(buttons, BorderLayout.SOUTH);
-		add(contents);
+		frame.add(contents);
 		
 		jCREA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String name = JOptionPane.showInputDialog(Project.this, 
+				String name = JOptionPane.showInputDialog(frame, 
 					"What do you want to call this level?", 
 					"Level Name", JOptionPane.QUESTION_MESSAGE);
 				if(name == null || name.length() == 0) return;
-				Project.this.setVisible(false);
+				frame.setVisible(false);
 				new Level(Project.this, name.trim()).edit();
 			}
 		});
@@ -62,37 +62,37 @@ public class Project extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				int index = list.list.getSelectedIndex();
 				if(index < 0) return;
-				Project.this.setVisible(false);
+				frame.setVisible(false);
 				levels.get(index).edit();
 			}
 		});
 		jEXPO.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if(Util.askSave(Project.this) != JOptionPane.YES_OPTION) return;
+					if(Util.askSave(frame) != JOptionPane.YES_OPTION) return;
 					Dynamic d = new Dynamic();
-					d.putRawString(HEADER);
+					d.putRawString(BIN_HEADER);
 					d.putInt(patterns.size());
 					for(Pattern p : patterns) {
 						d.putString(p.toString());
-						p.writeFile(d);
+						p.writeBIN(d);
 					}
 					d.putInt(levels.size());
-					for(Level l : levels) l.writeFile(d);
-					d.putRawString(FOOTER);
+					for(Level l : levels) l.writeBIN(d);
+					d.putRawString(BIN_FOOTER);
 					d.write(new File(new File("."), NAME));
-					Util.showSuccess(Project.this);
+					Util.showSuccess(frame);
 				} catch (Exception ex) {
-					Util.showError(Project.this, ex.getMessage());
+					Util.showError(frame, ex.getMessage());
 					ex.printStackTrace();
 				}
 			}
 		});
 		
-		pack();
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setLocationRelativeTo(null);
-		setVisible(true);
+		frame.pack();
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 	}
 
 	public void loadLevels() {

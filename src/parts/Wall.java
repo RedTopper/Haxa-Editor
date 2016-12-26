@@ -1,28 +1,61 @@
 package parts;
 
+import org.w3c.dom.Element;
+
+import red.Dynamic;
+import red.UtilXML;
+
 public class Wall {
-	public static final int BYTE_LENGTH = 3 * 2; //3 chars consisting of 2 bytes each
+	
+	//Globals
 	public static final int MIN_DISTANCE = 80;
+	
+	//XML
+	public static final String XML_HEADER= "Wall";
+	public static final String XML_DISTANCE = "Distance";
+	public static final String XML_HEIGHT = "Height";
+	public static final String XML_SIDE = "Side";
+	
+	public Wall() {
+		setDefaults();
+	}
+	
+	public Wall(Element e) {
+		setDefaults();
+		try {
+			readXML(e);
+		} catch(Exception ex) {
+			System.out.println("Failure to parse wall! Using default wall information.");
+		}
+	}
+	
+	//READ AND WRITE VARIABLES
 	private int distance;
 	private int height;
 	private int side;
-	
-	public enum Set {
-		DISTANCE,
-		HEIGHT,
-		SIDE
+
+	private void setDefaults() {
+		this.distance 	= 0;
+		this.height 	= 16;
+		this.side 		= 0;
 	}
 	
-	public Wall() {
-		this.distance = 0;
-		this.height = 16;
-		this.side = 0;
+	public void readXML(Element e) throws Exception {
+		distance 	= UtilXML.getInt(e, XML_DISTANCE);
+		height 		= UtilXML.getInt(e, XML_HEIGHT);
+		side 		= UtilXML.getInt(e, XML_SIDE);
 	}
 	
-	public Wall(int distance, int height, int side) {
-		this.distance = distance - MIN_DISTANCE;
-		this.height = height;
-		this.side = side;
+	public void writeXML(Element e) {
+		UtilXML.putInt(e, XML_DISTANCE, distance);
+		UtilXML.putInt(e, XML_HEIGHT, height);
+		UtilXML.putInt(e, XML_SIDE, side);
+	}
+	
+	public void writeBIN(Dynamic d) {
+		d.putChar(getDistance());
+		d.putChar(getHeight());
+		d.putChar(getSide());
 	}
 	
 	public char getDistance() {

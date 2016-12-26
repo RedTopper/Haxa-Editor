@@ -11,9 +11,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
-import java.nio.BufferUnderflowException;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,6 +21,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import data.Level;
 import data.Project;
@@ -29,57 +32,72 @@ import gfx.JPattern;
 import red.Dynamic;
 import red.ListData;
 import red.Util;
+import red.UtilXML;
 
-@SuppressWarnings("serial")
-public class Pattern extends JFrame{
+public class Pattern {
 	
 	//Globals
 	public static final String DIR_NAME = "patterns";
-	public static final String HEADER = "PATTERN1.0";
-	public static final String FOOTER = "ENDPATTERN";
-	public static final String EXTENSION = ".ptn";
+	public static final String XML_HEADER = "Pattern";
+	public static final String BIN_HEADER = "PTN1.0";
+	public static final String BIN_FOOTER = "ENDPTN";
 	
-	//Locals
+	//Finals
 	public final Project project;
 	public final File file;
-
-	//Variables to write to file
-	private int sidesRequired;
-	private ArrayList<Wall> walls = new ArrayList<>();
+	public final JFrame frame;
 	
 	public Pattern(Project project, String name) {
-		super("New pattern '" + name + "'");
+		this.frame = new JFrame("New pattern '" + name + "'");
 		this.project = project;
-		this.file = new File(project.dir, DIR_NAME + File.separator + name + EXTENSION);
-		this.sidesRequired = 6;
+		this.file = new File(project.dir, DIR_NAME + File.separator + name + ".xml");
+		setDefaults();
 	}
 	
-	public Pattern(Project project, File patternFile) throws IOException {
-		super("Pattern '" + patternFile.getName() + "'");
+	public Pattern(Project project, File patternFile) {
+		this.frame = new JFrame("Pattern '" + patternFile.getName() + "'");
 		this.project = project;
 		this.file = patternFile;
-		ByteBuffer patternRawData = Util.readBinaryFile(patternFile);
+		setDefaults();
 		try {
-			Util.checkString(patternRawData, HEADER);
-			this.sidesRequired = patternRawData.getInt();
-			loadWalls(patternRawData);
-			Util.checkString(patternRawData, FOOTER);
-		} catch(BufferUnderflowException e) {
-			System.out.println("The file does not have all of the properties needed to create a level!");
-			throw e;
+			Document doc = UtilXML.openXML(patternFile, XML_HEADER);
+			readXML(doc.getDocumentElement());
+		} catch(Exception ex) {
+			System.out.println("Failure to parse pattern file " + toString() + "! Using default pattern information.");
 		}
 	}
 	
-	public void writeFile(Dynamic d) throws IOException {
-		d.putRawString(HEADER);
+	//READ AND WRITE VARIABLES
+	public static final String XML_SIDES_REQUIRED = "SidesRequired";
+	private int sidesRequired;
+	private List<Wall> walls;
+	
+	private void setDefaults() {
+		this.sidesRequired 	= 6;
+		this.walls 			= new ArrayList<>();
+	}
+	
+	public void readXML(Element e) throws Exception {
+		this.sidesRequired 	= UtilXML.getInt(e, XML_SIDES_REQUIRED);
+		this.walls 			= UtilXML.getWalls(e);
+	}
+	
+	public void writeXML(Element e) {
+		UtilXML.putInt(e, XML_SIDES_REQUIRED, sidesRequired);
+		UtilXML.putWalls(e, walls);
+	}
+	
+	public void writeBIN(Dynamic d) throws IOException {
+		d.putRawString(BIN_HEADER);
 		d.putInt(sidesRequired);
-		d.putWalls(walls);
-		d.putRawString(FOOTER);
+		d.putInt(walls.size());
+		for(Wall wall : walls) wall.writeBIN(d);
+		d.putRawString(BIN_FOOTER);
 	}
 	
 	public void edit(Level level) {
-		setLayout(new BorderLayout());
-		addWindowListener(new WindowListener() {
+		frame.setLayout(new BorderLayout());
+		frame.addWindowListener(new WindowListener() {
 			public void windowOpened(WindowEvent e) {}
 			public void windowClosed(WindowEvent e) {}
 			public void windowIconified(WindowEvent e) {}
@@ -88,7 +106,7 @@ public class Pattern extends JFrame{
 			public void windowDeactivated(WindowEvent e) {};
 			public void windowClosing(WindowEvent e) {
 				level.refreshPatterns();
-				level.setVisible(true);
+				level.frame.setVisible(true);
 			}
 		});
 		
@@ -114,13 +132,13 @@ public class Pattern extends JFrame{
 		leftConfig.setPreferredSize(new Dimension(220,0));
 		leftConfig.add(wallList);
 		leftConfig.add(editBoxes);
-		add(leftConfig, BorderLayout.WEST);
-		add(patternCanvis, BorderLayout.CENTER);
+		frame.add(leftConfig, BorderLayout.WEST);
+		frame.add(patternCanvis, BorderLayout.CENTER);
 		
 		//Action Listeners
-		addFocus(jWALL, patternCanvis, jDIST, Wall.Set.DISTANCE);
-		addFocus(jWALL, patternCanvis, jHEIG, Wall.Set.HEIGHT);
-		addFocus(jWALL, patternCanvis, jSIDE, Wall.Set.SIDE);
+		addFocus(jWALL, patternCanvis, jDIST, Set.DISTANCE);
+		addFocus(jWALL, patternCanvis, jHEIG, Set.HEIGHT);
+		addFocus(jWALL, patternCanvis, jSIDE, Set.SIDE);
 		jWALL.list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				int index = jWALL.list.getSelectedIndex();
@@ -153,23 +171,25 @@ public class Pattern extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					sidesRequired 	= Integer.parseInt(jLVSD.getText());
-					if(Util.askSave(Pattern.this) != JOptionPane.YES_OPTION) return;
-					Dynamic d = new Dynamic();
-					writeFile(d);
-					d.write(file);
-					Util.showSuccess(Pattern.this);
+					if(Util.askSave(frame) != JOptionPane.YES_OPTION) return;
+					Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+					Element el = doc.createElement(XML_HEADER);
+					writeXML(el);
+					doc.appendChild(el);
+					UtilXML.writeXML(file, doc);
+					Util.showSuccess(frame);
 				} catch (Exception ex) {
-					Util.showError(Pattern.this, ex.getMessage());
+					Util.showError(frame, ex.getMessage());
 					ex.printStackTrace();
 				}
 			}
 		});
 		
-		pack();
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setLocationRelativeTo(null);
-		setMinimumSize(getPreferredSize());
-		setVisible(true);
+		frame.pack();
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
+		frame.setMinimumSize(frame.getPreferredSize());
+		frame.setVisible(true);
 	}
 
 	public String toString() {
@@ -183,16 +203,10 @@ public class Pattern extends JFrame{
 	public int getSides() {
 		return sidesRequired;
 	}
-
-	private void loadWalls(ByteBuffer patternRawData) {
-		int numberOfWalls = patternRawData.getInt();
-		for(int i = 0; i < numberOfWalls; i++) {
-			walls.add(new Wall(patternRawData.getChar(), patternRawData.getChar(), patternRawData.getChar()));
-		}
-	}
 	
 	//TODO: Fix the race case when selecting the select thing.
-	private void addFocus(ListData selected, JPattern patternCanvis, JTextField field, Wall.Set side) {
+	enum Set {DISTANCE, HEIGHT, SIDE};
+	private void addFocus(ListData selected, JPattern patternCanvis, JTextField field, Set side) {
 		field.addFocusListener(new FocusListener() {
 			public void focusGained(FocusEvent e) {}
 			public void focusLost(FocusEvent e) {

@@ -9,13 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.BufferUnderflowException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
@@ -29,18 +24,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 public final class Util {
-	private Util() throws InstantiationException {
-		throw new InstantiationException();
-	}
 	
-	public enum FileType {
-		FILE,
-		DIR
-	}
+	public enum FileType {FILE, DIR}
 	
 	public static final int COLOR_BYTE_LENGTH = 3; // Each color takes up 1 byte;
-	public static final String OLD = File.separator + "backup";
 	public static final Color BACKGROUND = new Color(245, 245, 245);
+	public static final String OLD = File.separator + "backup";
 	public static final String SAVE_QUESTION_TITLE = "Really save?";
 	public static final String SAVE_QUESTION_MESSAGE = "Do you really want to save this information?\n"
 													 + "(The current file will be backed up)";
@@ -49,8 +38,10 @@ public final class Util {
 	public static final String SAVE_FAIL_TITLE = "Fail!";
 	public static final String SAVE_FAIL_MESSAGE = "Error writing the level!";
 	
+	private Util() throws InstantiationException {
+		throw new InstantiationException();
+	}
 	
-
 	/**
 	 * Gets a directory. If it does not get the directory, it will create it
 	 * If it cannot edit the directory, then the program will quit.
@@ -102,72 +93,6 @@ public final class Util {
 	}
 	
 	/**
-	 * Checks to make sure that a string in the file appears
-	 * (Useful for checking the header or footer of the file)
-	 * @param data Raw data to check
-	 * @param s The string to compare (will read as many bytes as passed string)
-	 * @throws IOException
-	 * @throws BufferUnderflowException
-	 */
-	public static void checkString(ByteBuffer data, String s) throws IOException, BufferUnderflowException {
-		for(char header : s.toCharArray()) {
-			byte file = data.get();
-			if(header != file) {
-				throw new IOException("Invalid string!");
-			}
-		}
-	}
-	
-	/**
-	 * Reads a sized, dynamic string from the file.
-	 * @param data Raw data
-	 * @return A string.
-	 * @throws IOException
-	 * @throws BufferUnderflowException
-	 */
-	public static String readString(ByteBuffer data) throws IOException, BufferUnderflowException {
-		int length = data.getInt();
-		StringBuilder string = new StringBuilder();
-		for(int i = 0; i < length; i++) {
-			string.append((char)data.get());
-		}
-		return string.toString();
-	}
-
-	/**
-	 * Reads a list of colors from the file.
-	 * @param data Raw data.
-	 * @return An array list of read colors.
-	 * @throws IOException
-	 * @throws BufferUnderflowException
-	 */
-	public static ArrayList<Color> readColors(ByteBuffer data) throws IOException, BufferUnderflowException {
-		int length = data.getInt();
-		ArrayList<Color> colors = new ArrayList<>();
-		for(int i = 0; i < length; i++) {
-			colors.add(new Color(data.get() & 0xFF, data.get() & 0xFF, data.get() & 0xFF));
-		}
-		return colors;
-	}
-
-	/**
-	 * Opens a binary file for reading.
-	 * @param file The file  to open
-	 * @return A  binary ByteBuffer representing the whole file.
-	 * @throws IOException
-	 */
-	public static ByteBuffer readBinaryFile(File file) throws IOException {
-		FileInputStream inputStream = new FileInputStream(file);
-		FileChannel channel = inputStream.getChannel();
-		ByteBuffer rawData = ByteBuffer.allocate((int)channel.size());
-		channel.read(rawData);
-		rawData.rewind();
-		rawData.order(ByteOrder.LITTLE_ENDIAN);
-		inputStream.close();
-		return rawData;
-	}
-	
-	/**
 	 * Creates and colors a new panel.
 	 * @param manager The layout of the panel to create.
 	 * @return A new panel.
@@ -211,7 +136,7 @@ public final class Util {
 	 * @param list The list of data to add to the panel (must have a toString method)!
 	 * @return The added list and model.
 	 */
-	public static ListData addTitledListToPanel(JPanel panel, Object constraints, String title, ArrayList<?> list) {
+	public static ListData addTitledListToPanel(JPanel panel, Object constraints, String title, List<?> list) {
 		DefaultListModel<String> model = new DefaultListModel<>();
 		for(Object o : list) {
 			model.addElement(o.toString());
@@ -239,7 +164,7 @@ public final class Util {
 		return button;
 	}
 	
-	public static void createColorPicker(JPanel colors, ArrayList<Color> colorList, String name) {
+	public static void createColorPicker(JPanel colors, List<Color> colorList, String name) {
 		JPanel sub = startFrame(new BorderLayout());
 		ListData data = addTitledListToPanel(sub, BorderLayout.CENTER, name, colorList);
 		JPanel buttons = startFrame(new GridLayout(1, 0));
@@ -281,7 +206,7 @@ public final class Util {
 		});
 	}
 
-	public static void updateColorList(ListData data, ArrayList<Color> colorList) {
+	public static void updateColorList(ListData data, List<Color> colorList) {
 		int selected = data.list.getSelectedIndex();
 		int direction = colorList.size() - data.model.size();
 		data.model.clear();
@@ -289,7 +214,7 @@ public final class Util {
 		fixSelectedIndex(data, colorList, selected, direction);
 	}
 
-	public static void updateList(ListData data, ArrayList<?> list) {
+	public static void updateList(ListData data, List<?> list) {
 		int selected = data.list.getSelectedIndex();
 		int direction = list.size() - data.model.size();
 		data.model.clear();
@@ -323,7 +248,7 @@ public final class Util {
 				SAVE_FAIL_MESSAGE + "\n" + message, SAVE_FAIL_TITLE, JOptionPane.ERROR_MESSAGE);
 	}
 	
-	private static void fixSelectedIndex(ListData data, ArrayList<?> list, int selected, int difference) {
+	private static void fixSelectedIndex(ListData data, List<?> list, int selected, int difference) {
 		if(selected + difference < list.size()) {
 			data.list.setSelectedIndex((selected + difference >= 0 ? selected + difference : 0));
 		}

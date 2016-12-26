@@ -8,8 +8,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-
-import parts.Wall;
+import java.util.List;
 
 public class Dynamic {
 	ArrayList<ByteBuffer> buffers = new ArrayList<>();
@@ -28,15 +27,10 @@ public class Dynamic {
 		buffers.add(buf);
 	}
 	
-	public void putColors(ArrayList<Color> c) {
-		ByteBuffer buf = ByteBuffer.allocate(c.size() * 3 + 4);
+	public void putChar(char c) {
+		ByteBuffer buf = ByteBuffer.allocate(2);
 		buf.order(ByteOrder.LITTLE_ENDIAN);
-		buf.putInt(c.size());
-		for(int i = 0; i < c.size(); i++) {
-			buf.put((byte) c.get(i).getRed());
-			buf.put((byte) c.get(i).getGreen());
-			buf.put((byte) c.get(i).getBlue());
-		}
+		buf.putChar(c);
 		buffers.add(buf);
 	}
 	
@@ -47,23 +41,23 @@ public class Dynamic {
 		buf.put(string.getBytes());
 		buffers.add(buf);
 	}
-	
-	public void putWalls(ArrayList<Wall> walls) {
-		ByteBuffer buf = ByteBuffer.allocate(walls.size() * Wall.BYTE_LENGTH + 4);
-		buf.order(ByteOrder.LITTLE_ENDIAN);
-		buf.putInt(walls.size());
-		for(Wall wall : walls) {
-			buf.putChar(wall.getDistance());
-			buf.putChar(wall.getHeight());
-			buf.putChar(wall.getSide());
-		}
-		buffers.add(buf);
-	}
 
 	public void putRawString(String string) {
 		ByteBuffer buf = ByteBuffer.allocate(string.length());
 		buf.order(ByteOrder.LITTLE_ENDIAN);
 		buf.put(string.getBytes());
+		buffers.add(buf);
+	}
+	
+	public void putColors(List<Color> bg1) {
+		ByteBuffer buf = ByteBuffer.allocate(bg1.size() * 3 + 4);
+		buf.order(ByteOrder.LITTLE_ENDIAN);
+		buf.putInt(bg1.size());
+		for(int i = 0; i < bg1.size(); i++) {
+			buf.put((byte) bg1.get(i).getRed());
+			buf.put((byte) bg1.get(i).getGreen());
+			buf.put((byte) bg1.get(i).getBlue());
+		}
 		buffers.add(buf);
 	}
 	
@@ -84,6 +78,6 @@ public class Dynamic {
 		}
 		channel.close();
 		outputStream.close();
-		System.out.println("Backed up and wrote file: '" + file.getAbsolutePath() + "'");
+		System.out.println("Backed up and wrote binary file: '" + file.getAbsolutePath() + "'");
 	}
 }

@@ -9,111 +9,144 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
-import java.nio.BufferUnderflowException;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import parts.Pattern;
 import red.Dynamic;
 import red.ListData;
 import red.Util;
+import red.UtilXML;
 
-@SuppressWarnings("serial")
-public class Level extends JFrame {
+public class Level {
 	
-	//Globals
-	public static final String HEADER = "LEVEL2.0";
-	public static final String FOOTER = "ENDLEVEL";
-	public static final String EXTENSION = ".head";
+	//Files
+	public static final String XML_HEADER = "Level";
+	public static final String BIN_HEADER = "LEVEL2.0";
+	public static final String BIN_FOOTER = "ENDLEVEL";
 	
-	//Locals
+	//Finals
 	public final Project project;
 	public final File file;
+	public final JFrame frame;
 	private ListData jpatterns;
-	//Variables to write to file
+	
+	public Level(Project project, String name) {
+		this.frame = new JFrame("New level '" + name + "'");
+		this.project = project;
+		this.file = new File(project.dir, name.replaceAll("\\s", "") + ".xml");
+		setDefaults();
+		this.name = name.toUpperCase();
+	}
+	
+	public Level(Project project, File levelFile)  {
+		this.frame = new JFrame("Level '" + levelFile.getName() + "'");
+		this.project = project;
+		this.file = levelFile;
+		setDefaults();
+		try {
+			Document doc = UtilXML.openXML(levelFile, XML_HEADER);
+			readXML(doc.getDocumentElement());
+		}  catch(Exception e) {
+			System.out.println("Failure to parse level file " + toString() + "! Using default level information.");
+		}
+	}
+	
+	//READ AND WRITE VARIABLES
+	public static final String XML_NAME = "Name";
+	public static final String XML_DIFFICULTY = "Difficulty";
+	public static final String XML_MODE = "Mode";
+	public static final String XML_CREATOR = "Creator";
+	public static final String XML_MUSIC = "Music";
+	public static final String XML_BG1 = "BackgroundColorOne";
+	public static final String XML_BG2 = "BackgroundColorTwo";
+	public static final String XML_FG = "ForegroundColor";
+	public static final String XML_SPEED_WALL = "SpeedWall";
+	public static final String XML_SPEED_ROTATION = "SpeedRotation";
+	public static final String XML_SPEED_CURSOR = "SpeedCursor";
+	public static final String XML_SPEED_PULSE = "SpeedPulse";
+	public static final String XML_PATTERNS = "LinkedPatterns";
+	public static final String XML_PATTERN = "Pattern";
 	private String name;
 	private String difficulty;
 	private String mode;
 	private String creator;
 	private String music;
-	private ArrayList<Color> bg1 = new ArrayList<>();
-	private ArrayList<Color> bg2 = new ArrayList<>();
-	private ArrayList<Color> fg = new ArrayList<>();
-	private float wallSpeed;
-	private float rotationSpeed;
-	private float humanSpeed;
-	private int pulseSpeed;
-	private ArrayList<Pattern> patterns = new ArrayList<>();
+	private List<Color> bg1;
+	private List<Color> bg2;
+	private List<Color> fg;
+	private float speedWall;
+	private float speedRotation;
+	private float speedCursor;
+	private int speedPulse;
+	private List<Pattern> patterns;
 	
-	/**
-	 * Default level parameters.
-	 * @param projectPath The folder of the project
-	 * @param name Project name (also file name)
-	 * @param availablePatterns A list of all of the loaded patterns
-	 */
-	public Level(Project project, String name) {
-		super("New level '" + name + "'");
-		this.project = project;
-		this.file = new File(project.dir, name.replaceAll("\\s", "") + EXTENSION);
-		this.name = name.toUpperCase();
-		this.difficulty = "UNKNOWN";
-		this.mode = "NORMAL";
-		this.creator = "ANONYMOUS";
-		this.music = "NONE";
+	private void setDefaults() {
+		this.name 			= "VOID";
+		this.difficulty		= "UNKNOWN";
+		this.mode 			= "NORMAL";
+		this.creator 		= "ANONYMOUS";
+		this.music 			= "NONE";
+		this.bg1			= new ArrayList<>();
+		this.bg2			= new ArrayList<>();
+		this.fg 			= new ArrayList<>();
 		this.bg1.add(Color.BLACK);
 		this.bg2.add(Color.GRAY);
 		this.fg.add(Color.WHITE);
-		this.wallSpeed = 2.0f;
-		this.rotationSpeed = (float)(Math.PI  * 2.0) / 120.0f;
-		this.humanSpeed = (float)(Math.PI  * 2.0) / 60.0f;
-		this.pulseSpeed = 10;
+		this.speedWall 		= 2.0f;
+		this.speedRotation 	= (float)(Math.PI  * 2.0) / 120.0f;
+		this.speedCursor	= (float)(Math.PI  * 2.0) / 60.0f;
+		this.speedPulse 	= 120;
+		this.patterns 		= new ArrayList<>();
 	}
 	
-	/**
-	 * Loads a level from a file.
-	 * @param levelFile The file to load.
-	 * @param availablePatterns A list of all loaded patterns
-	 * @throws IOException
-	 */
-	public Level(Project project, File levelFile) throws IOException {
-		super("Level '" + levelFile.getName() + "'");
-		ByteBuffer levelRawData = Util.readBinaryFile(levelFile);
-		this.project = project;
-		this.file = levelFile;
-		try {
-			Util.checkString(levelRawData, HEADER);
-			this.name = Util.readString(levelRawData);
-			this.difficulty = Util.readString(levelRawData);
-			this.mode = Util.readString(levelRawData);
-			this.creator = Util.readString(levelRawData);
-			this.music = Util.readString(levelRawData);
-			this.bg1 = Util.readColors(levelRawData);
-			this.bg2 = Util.readColors(levelRawData);
-			this.fg = Util.readColors(levelRawData);
-			this.wallSpeed = levelRawData.getFloat();
-			this.rotationSpeed = levelRawData.getFloat();
-			this.humanSpeed = levelRawData.getFloat();
-			this.pulseSpeed = levelRawData.getInt();
-			loadPatterns(levelRawData);
-			Util.checkString(levelRawData, FOOTER);
-		}  catch(BufferUnderflowException e) {
-			System.out.println("The file does not have all of the properties needed to create a level!");
-			throw e;
-		}
+	public void readXML(Element e) throws Exception {
+		this.name 			= UtilXML.getString(e, XML_NAME);
+		this.difficulty 	= UtilXML.getString(e, XML_DIFFICULTY);
+		this.mode 			= UtilXML.getString(e, XML_MODE);
+		this.creator 		= UtilXML.getString(e, XML_CREATOR);
+		this.music 			= UtilXML.getString(e, XML_MUSIC);
+		this.speedWall 		= UtilXML.getFloat(e, XML_SPEED_WALL);
+		this.speedRotation 	= UtilXML.getFloat(e, XML_SPEED_ROTATION);
+		this.speedCursor	= UtilXML.getFloat(e, XML_SPEED_CURSOR);
+		this.speedPulse 	= UtilXML.getInt(e, XML_SPEED_PULSE);
+		patterns 			= getPatterns(e);
+		this.bg1			= UtilXML.getColors(e, XML_BG1);
+		this.bg2			= UtilXML.getColors(e, XML_BG2);
+		this.fg				= UtilXML.getColors(e, XML_FG);
 	}
 
-	/**
-	 * Writes this object to a file.
-	 * @throws IOException
-	 */
-	public void writeFile(Dynamic d) throws IOException {
-		d.putRawString(HEADER);
+	public void writeXML(Element e) {
+		UtilXML.putString(e, XML_NAME, name);
+		UtilXML.putString(e, XML_DIFFICULTY, difficulty);
+		UtilXML.putString(e, XML_MODE, mode);
+		UtilXML.putString(e, XML_CREATOR, creator);
+		UtilXML.putString(e, XML_MUSIC, music);
+		UtilXML.putFloat(e, XML_SPEED_WALL, speedWall);
+		UtilXML.putFloat(e, XML_SPEED_ROTATION, speedRotation);
+		UtilXML.putFloat(e, XML_SPEED_CURSOR, speedCursor);
+		UtilXML.putInt(e, XML_SPEED_PULSE, speedPulse);
+		Element ptns = e.getOwnerDocument().createElement(XML_PATTERNS);
+		for(Pattern p : patterns) UtilXML.putString(ptns, XML_PATTERN, p.toString());
+		e.appendChild(ptns);
+		UtilXML.putColors(e, XML_BG1, bg1);
+		UtilXML.putColors(e, XML_BG2, bg2);
+		UtilXML.putColors(e, XML_FG, fg);
+	}
+	
+	public void writeBIN(Dynamic d) throws IOException {
+		d.putRawString(BIN_HEADER);
 		d.putString(name);
 		d.putString(difficulty);
 		d.putString(mode);
@@ -122,21 +155,18 @@ public class Level extends JFrame {
 		d.putColors(bg1);
 		d.putColors(bg2);
 		d.putColors(fg);
-		d.putFloat(wallSpeed);
-		d.putFloat(rotationSpeed);
-		d.putFloat(humanSpeed);
-		d.putInt(pulseSpeed);
+		d.putFloat(speedWall);
+		d.putFloat(speedRotation);
+		d.putFloat(speedCursor);
+		d.putInt(speedPulse);
 		d.putInt(patterns.size());
 		for(Pattern p : patterns) d.putString(p.toString());
-		d.putRawString(FOOTER);
+		d.putRawString(BIN_FOOTER);
 	}
 
-	/**
-	 * Launches the editor.
-	 */
 	public void edit() {
-		setLayout(new GridLayout(1,0));
-		addWindowListener(new WindowListener() {
+		frame.setLayout(new GridLayout(1,0));
+		frame.addWindowListener(new WindowListener() {
 			public void windowOpened(WindowEvent e) {}
 			public void windowClosed(WindowEvent e) {}
 			public void windowIconified(WindowEvent e) {}
@@ -145,7 +175,7 @@ public class Level extends JFrame {
 			public void windowDeactivated(WindowEvent e) {};
 			public void windowClosing(WindowEvent e) {
 				project.loadLevels();
-				project.setVisible(true);
+				project.frame.setVisible(true);
 			}
 		});
 		
@@ -156,19 +186,19 @@ public class Level extends JFrame {
 		JTextField jMODE = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Mode", mode);
 		JTextField jCREA = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Creator", creator);
 		JTextField jMUSE = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Music File + extension", music);
-		JTextField jWALL = Util.addTitledFieldToPanel(textConfiguration, null, "[float] Wall Speed", wallSpeed + "");
-		JTextField jROTA = Util.addTitledFieldToPanel(textConfiguration, null, "[TAU/float] Rotation Step", rotationSpeed + "");
-		JTextField jHUMA = Util.addTitledFieldToPanel(textConfiguration, null, "[TAU/float] Human Step", humanSpeed + "");
-		JTextField jPLUS = Util.addTitledFieldToPanel(textConfiguration, null, "[float] Pulse Speed", pulseSpeed + "");
+		JTextField jWALL = Util.addTitledFieldToPanel(textConfiguration, null, "[float] Wall Speed", speedWall + "");
+		JTextField jROTA = Util.addTitledFieldToPanel(textConfiguration, null, "[TAU/float] Rotation Step", speedRotation + "");
+		JTextField jCURS = Util.addTitledFieldToPanel(textConfiguration, null, "[TAU/float] Human Step", speedCursor + "");
+		JTextField jPLUS = Util.addTitledFieldToPanel(textConfiguration, null, "[float] Pulse Speed", speedPulse + "");
 		JButton jSAVE = Util.addButtonToPanel(textConfiguration, null, "Save Configuration");
-		add(textConfiguration);
+		frame.add(textConfiguration);
 		
 		//BEGIN Color Panel
 		JPanel colors = Util.startFrame(new GridLayout(0,1));
 		Util.createColorPicker(colors, bg1, "Background Primary");
 		Util.createColorPicker(colors, bg2, "Background Secondary");
 		Util.createColorPicker(colors, fg, "Foreground");
-		add(colors);
+		frame.add(colors);
 		
 		//BEGIN Right Side pattern chooser
 		JPanel patternConfiguration = Util.startFrame(new GridLayout(0,1));
@@ -186,7 +216,7 @@ public class Level extends JFrame {
 		JButton jLINK = Util.addButtonToPanel(patternLevel, BorderLayout.NORTH, "Link available pattern to this level");
 		JButton jUNLK = Util.addButtonToPanel(patternLevel, BorderLayout.SOUTH,"Unlink pattern from this level");
 		patternConfiguration.add(patternLevel);
-		add(patternConfiguration);
+		frame.add(patternConfiguration);
 		
 		//Action Listeners
 		jSAVE.addActionListener(new ActionListener() {
@@ -197,28 +227,30 @@ public class Level extends JFrame {
 					mode 			= Util.upperText(jMODE);
 					creator 		= Util.upperText(jCREA);
 					music 			= Util.getText(jMUSE);
-					wallSpeed 		= Float.parseFloat(jWALL.getText());
-					rotationSpeed 	= Float.parseFloat(jROTA.getText());
-					humanSpeed 		= Float.parseFloat(jHUMA.getText());
-					pulseSpeed 		= Integer.parseInt(jPLUS.getText());
-					if(Util.askSave(Level.this) != JOptionPane.YES_OPTION) return;
-					Dynamic d = new Dynamic();
-					writeFile(d);
-					d.write(file);
-					Util.showSuccess(Level.this);
+					speedWall 		= Float.parseFloat(jWALL.getText());
+					speedRotation 	= Float.parseFloat(jROTA.getText());
+					speedCursor 	= Float.parseFloat(jCURS.getText());
+					speedPulse 		= Integer.parseInt(jPLUS.getText());
+					if(Util.askSave(frame) != JOptionPane.YES_OPTION) return;
+					Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+					Element el = doc.createElement(XML_HEADER);
+					writeXML(el);
+					doc.appendChild(el);
+					UtilXML.writeXML(file, doc);
+					Util.showSuccess(frame);
 				} catch (Exception ex) {
-					Util.showError(Level.this, ex.getMessage());
+					Util.showError(frame, ex.getMessage());
 					ex.printStackTrace();
 				}
 			}
 		});
 		jPATT.addActionListener(new  ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String patternName = JOptionPane.showInputDialog(Level.this, 
+				String patternName = JOptionPane.showInputDialog(frame, 
 					"What do you want to call this pattern?", 
 					"Pattern File Name", JOptionPane.QUESTION_MESSAGE);
 				if(patternName == null || patternName.length() == 0) return;
-				Level.this.setVisible(false);
+				frame.setVisible(false);
 				new Pattern(project, patternName).edit(Level.this);
 			}
 		});
@@ -226,7 +258,7 @@ public class Level extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int selection = jpatterns.list.getSelectedIndex();
 				if(selection < 0) return;
-				Level.this.setVisible(false);
+				frame.setVisible(false);
 				project.getPatterns().get(selection).edit(Level.this);;
 			}
 		});
@@ -248,63 +280,45 @@ public class Level extends JFrame {
 		});
 		
 		//bring window to life!
-		pack();
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setLocationRelativeTo(null);
-		setMinimumSize(getPreferredSize());
-		setVisible(true);
+		frame.pack();
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setLocationRelativeTo(null);
+		frame.setMinimumSize(frame.getPreferredSize());
+		frame.setVisible(true);
 	}
 	
 	public String toString() {
 		return file.getName();
 	}
 	
-	public ArrayList<Color> getBG1() {
+	public List<Color> getBG1() {
 		return bg1;
 	}
 	
-	public ArrayList<Color> getBG2() {
+	public List<Color> getBG2() {
 		return bg2;
 	}
 	
-	public ArrayList<Color> getFG() {
+	public List<Color> getFG() {
 		return fg;
-	}
-
-	/**
-	 * Loads the patterns into this level (the ones needed)
-	 * @param levelRawData The raw data  of the file.
-	 * @param numberOfPatterns The number of patterns read.
-	 * @param availablePatterns All available patterns.
-	 * @throws IOException
-	 */
-	private void loadPatterns(ByteBuffer levelRawData) throws IOException {
-		
-		//get number of patterns
-		int numberOfPatterns = levelRawData.getInt();
-		
-		//load patterns from shared container
-		String[] patternNames = new String[numberOfPatterns];
-		for(int i = 0; i < numberOfPatterns; i++) {
-			patternNames[i] = Util.readString(levelRawData);
-			
-			//find matching pattern in patterns directory
-			boolean patternFound = false;
-			for(int j = 0; j < project.getPatterns().size(); j++) {
-				if(patternNames[i].equals(project.getPatterns().get(j).toString())) {
-					patternFound = true;
-					this.patterns.add(project.getPatterns().get(j));
-					break;
-				}
-			}
-			
-			//if pattern is not found, level cannot be created
-			if(!patternFound) throw new IOException("Pattern " + patternNames[i] + " not found in the patterns folder!");
-		}
 	}
 	
 	public void refreshPatterns() {
 		project.loadPatterns();
 		Util.updateList(jpatterns, project.getPatterns());
+	}
+	
+	private List<Pattern> getPatterns(Element root) {
+		List<Pattern> patterns = new ArrayList<>();
+		Element block = (Element)root.getElementsByTagName(XML_PATTERNS).item(0);
+		if(block == null) return patterns;
+		NodeList epatterns = block.getElementsByTagName(XML_PATTERN);
+		for(int i = 0; i < epatterns.getLength(); i++) {
+			String bindName = ((Element)epatterns.item(i)).getTextContent();
+			for(Pattern pattern : project.getPatterns()) {
+				if(pattern.toString().equals(bindName)) patterns.add(pattern);
+			}
+		}
+		return patterns;
 	}
 }
