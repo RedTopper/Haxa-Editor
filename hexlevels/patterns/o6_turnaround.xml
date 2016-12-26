@@ -52,17 +52,17 @@
         <Side>3</Side>
     </Wall>
     <Wall>
-        <Distance>140</Distance>
+        <Distance>160</Distance>
         <Height>48</Height>
         <Side>2</Side>
     </Wall>
     <Wall>
-        <Distance>172</Distance>
+        <Distance>192</Distance>
         <Height>16</Height>
         <Side>1</Side>
     </Wall>
     <Wall>
-        <Distance>172</Distance>
+        <Distance>192</Distance>
         <Height>16</Height>
         <Side>3</Side>
     </Wall>

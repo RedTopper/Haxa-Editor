@@ -11,4 +11,9 @@
         <Height>32</Height>
         <Side>0</Side>
     </Wall>
+    <Wall>
+        <Distance>30</Distance>
+        <Height>32</Height>
+        <Side>1</Side>
+    </Wall>
 </Pattern>
