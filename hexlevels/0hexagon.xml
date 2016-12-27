@@ -5,22 +5,10 @@
     <Mode>FAMILIAR</Mode>
     <Creator>REDHAT</Creator>
     <Music>drFinkelfracken.wav</Music>
-    <SpeedWall>1.8</SpeedWall>
+    <SpeedWall>1.7</SpeedWall>
     <SpeedRotation>0.02617994</SpeedRotation>
     <SpeedCursor>0.10471976</SpeedCursor>
     <SpeedPulse>120</SpeedPulse>
-    <LinkedPatterns>
-        <Pattern>o5_3wall(x3).xml</Pattern>
-        <Pattern>o5_4wall.xml</Pattern>
-        <Pattern>o5_reverse.xml</Pattern>
-        <Pattern>o6_3wall(x2).xml</Pattern>
-        <Pattern>o6_3wall.xml</Pattern>
-        <Pattern>o6_4wall.xml</Pattern>
-        <Pattern>o6_5wall.xml</Pattern>
-        <Pattern>o6_quickshift.xml</Pattern>
-        <Pattern>o6_spiral.xml</Pattern>
-        <Pattern>o6_stack.xml</Pattern>
-    </LinkedPatterns>
     <BackgroundColorOne>
         <Color>
             <Red>90</Red>
@@ -57,4 +45,16 @@
             <Blue>28</Blue>
         </Color>
     </ForegroundColor>
+    <LinkedPatterns>
+        <Pattern>o5_3wall(x3).xml</Pattern>
+        <Pattern>o5_4wall.xml</Pattern>
+        <Pattern>o5_reverse.xml</Pattern>
+        <Pattern>o6_3wall(x2).xml</Pattern>
+        <Pattern>o6_3wall.xml</Pattern>
+        <Pattern>o6_4wall.xml</Pattern>
+        <Pattern>o6_5wall.xml</Pattern>
+        <Pattern>o6_quickshift.xml</Pattern>
+        <Pattern>o6_spiral.xml</Pattern>
+        <Pattern>o6_stack.xml</Pattern>
+    </LinkedPatterns>
 </Level>

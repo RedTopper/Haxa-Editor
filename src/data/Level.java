@@ -83,13 +83,13 @@ public class Level {
 	private String mode;
 	private String creator;
 	private String music;
-	private List<Color> bg1;
-	private List<Color> bg2;
-	private List<Color> fg;
 	private float speedWall;
 	private float speedRotation;
 	private float speedCursor;
 	private int speedPulse;
+	private List<Color> bg1;
+	private List<Color> bg2;
+	private List<Color> fg;
 	private List<Pattern> patterns;
 	
 	private void setDefaults() {
@@ -98,17 +98,17 @@ public class Level {
 		this.mode 			= "NORMAL";
 		this.creator 		= "ANONYMOUS";
 		this.music 			= "NONE";
-		this.bg1			= new ArrayList<>();
-		this.bg2			= new ArrayList<>();
-		this.fg 			= new ArrayList<>();
-		this.bg1.add(Color.BLACK);
-		this.bg2.add(Color.GRAY);
-		this.fg.add(Color.WHITE);
 		this.speedWall 		= 2.0f;
 		this.speedRotation 	= (float)(Math.PI  * 2.0) / 120.0f;
 		this.speedCursor	= (float)(Math.PI  * 2.0) / 60.0f;
 		this.speedPulse 	= 120;
+		this.bg1			= new ArrayList<>();
+		this.bg2			= new ArrayList<>();
+		this.fg 			= new ArrayList<>();
 		this.patterns 		= new ArrayList<>();
+		this.bg1.add(Color.BLACK);
+		this.bg2.add(Color.GRAY);
+		this.fg.add(Color.WHITE);
 	}
 	
 	public void readXML(Element e) throws Exception {
@@ -121,10 +121,10 @@ public class Level {
 		this.speedRotation 	= UtilXML.getFloat(e, XML_SPEED_ROTATION);
 		this.speedCursor	= UtilXML.getFloat(e, XML_SPEED_CURSOR);
 		this.speedPulse 	= UtilXML.getInt(e, XML_SPEED_PULSE);
-		this.patterns 		= getPatterns(e);
 		this.bg1			= UtilXML.getColors(e, XML_BG1);
 		this.bg2			= UtilXML.getColors(e, XML_BG2);
 		this.fg				= UtilXML.getColors(e, XML_FG);
+		this.patterns 		= getPatterns(e);
 	}
 
 	public void writeXML(Element e) {
@@ -137,12 +137,12 @@ public class Level {
 		UtilXML.putFloat(e, XML_SPEED_ROTATION, speedRotation);
 		UtilXML.putFloat(e, XML_SPEED_CURSOR, speedCursor);
 		UtilXML.putInt(e, XML_SPEED_PULSE, speedPulse);
-		Element ptns = e.getOwnerDocument().createElement(XML_PATTERNS);
-		for(Pattern p : patterns) UtilXML.putString(ptns, XML_PATTERN, p.toString());
-		e.appendChild(ptns);
 		UtilXML.putColors(e, XML_BG1, bg1);
 		UtilXML.putColors(e, XML_BG2, bg2);
 		UtilXML.putColors(e, XML_FG, fg);
+		Element ptns = e.getOwnerDocument().createElement(XML_PATTERNS);
+		for(Pattern p : patterns) UtilXML.putString(ptns, XML_PATTERN, p.toString());
+		e.appendChild(ptns);
 	}
 	
 	public void writeBIN(Dynamic d) throws IOException {

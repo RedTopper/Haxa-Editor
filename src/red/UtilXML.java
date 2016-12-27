@@ -68,8 +68,8 @@ public class UtilXML {
 	public static int getInt(Element root, String name) {
 		try {
 			Element e = (Element)root.getElementsByTagName(name).item(0);
-			if(e != null) return Integer.parseInt(e.getTextContent());
-		} catch(Exception e) {}
+			return Integer.parseInt(e.getTextContent());
+		} catch(Exception e) {System.err.println("Failed to parse int for tag " + name + "!");}
 		return 0;
 	}
 
@@ -82,8 +82,8 @@ public class UtilXML {
 	public static float getFloat(Element root, String name) {
 		try {
 			Element e = (Element)root.getElementsByTagName(name).item(0);
-			if(e != null) return Float.parseFloat(e.getTextContent());
-		} catch(Exception e) {}
+			return Float.parseFloat(e.getTextContent());
+		} catch(Exception e) {System.err.println("Failed to parse float for tag " + name + "!");}
 		return 0.0f;
 	}
 
@@ -96,8 +96,8 @@ public class UtilXML {
 	public static String getString(Element root, String name) {
 		try {
 			Element e = (Element)root.getElementsByTagName(name).item(0);
-			if(e != null) return e.getTextContent();
-		} catch(Exception e) {}
+			return e.getTextContent();
+		} catch(Exception e) {System.err.println("Failed to parse String for tag " + name + "!");}
 		return "NOT SET";
 	}
 
@@ -121,15 +121,15 @@ public class UtilXML {
 
 	public static List<Color> getColors(Element root, String name) {
 		List<Color> colors = new ArrayList<>();
-		Element block = (Element)root.getElementsByTagName(name).item(0);
-		if(block == null) return colors;
-		NodeList ecolors = block.getElementsByTagName(XML_COLOR);
-		if(ecolors == null) return colors;
-		for(int i = 0; i < ecolors.getLength(); i++) {
-			Element color = (Element)ecolors.item(i);
-			if(color == null) continue;
-			colors.add(getColor(color));
-		}
+		try {
+			Element block = (Element)root.getElementsByTagName(name).item(0);
+			NodeList ecolors = block.getElementsByTagName(XML_COLOR);
+			for(int i = 0; i < ecolors.getLength(); i++) {
+				Element color = (Element)ecolors.item(i);
+				if(color == null) continue;
+				colors.add(getColor(color));
+			}
+		} catch (Exception e) {System.err.println("Failed to parse Colors for tag " + name + "!");}
 		return colors;
 	}
 
@@ -141,13 +141,14 @@ public class UtilXML {
 
 	public static List<Wall> getWalls(Element root) {
 		List<Wall> walls = new ArrayList<>();
-		NodeList ewalls = root.getElementsByTagName(Wall.XML_HEADER);
-		if(ewalls == null) return walls;
-		for(int i = 0; i < ewalls.getLength(); i++) {
-			Element wall = (Element)ewalls.item(i);
-			if(wall == null) continue;
-			walls.add(new Wall(wall));
-		}
+		try {
+			NodeList ewalls = root.getElementsByTagName(Wall.XML_HEADER);
+			for(int i = 0; i < ewalls.getLength(); i++) {
+				Element wall = (Element)ewalls.item(i);
+				if(wall == null) continue;
+				walls.add(new Wall(wall));
+			}
+		} catch (Exception e) {System.err.println("Failed to parse Walls!");}
 		return walls;
 	}
 
