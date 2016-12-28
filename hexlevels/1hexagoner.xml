@@ -6,8 +6,8 @@
     <Creator>REDHAT</Creator>
     <Music>NONE</Music>
     <SpeedWall>1.9</SpeedWall>
-    <SpeedRotation>0.05235988</SpeedRotation>
-    <SpeedCursor>0.10471976</SpeedCursor>
+    <SpeedRotation>0.024166098</SpeedRotation>
+    <SpeedCursor>0.11423973</SpeedCursor>
     <SpeedPulse>120</SpeedPulse>
     <BackgroundColorOne>
         <Color>
@@ -18,6 +18,16 @@
         <Color>
             <Red>0</Red>
             <Green>102</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>127</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
             <Blue>0</Blue>
         </Color>
         <Color>
@@ -42,6 +52,16 @@
             <Green>76</Green>
             <Blue>0</Blue>
         </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>76</Green>
+            <Blue>0</Blue>
+        </Color>
     </BackgroundColorTwo>
     <ForegroundColor>
         <Color>
@@ -50,5 +70,15 @@
             <Blue>0</Blue>
         </Color>
     </ForegroundColor>
-    <LinkedPatterns/>
+    <LinkedPatterns>
+        <Pattern>o6_5pinreversaleasy.xml</Pattern>
+        <Pattern>o6_rrrrstop.xml</Pattern>
+        <Pattern>o6_stack.xml</Pattern>
+        <Pattern>o6_reverse(x2).xml</Pattern>
+        <Pattern>o6_reallyquickshift.xml</Pattern>
+        <Pattern>o6_3wall(x2).xml</Pattern>
+        <Pattern>o6_4wall.xml</Pattern>
+        <Pattern>o6_arc.xml</Pattern>
+        <Pattern>o6_lotsofwalls.xml</Pattern>
+    </LinkedPatterns>
 </Level>
