@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Pattern>
-    <SidesRequired>9</SidesRequired>
+    <SidesRequired>5</SidesRequired>
     <Wall>
         <Distance>0</Distance>
         <Height>10</Height>
@@ -20,10 +20,5 @@
         <Distance>0</Distance>
         <Height>10</Height>
         <Side>3</Side>
-    </Wall>
-    <Wall>
-        <Distance>0</Distance>
-        <Height>10</Height>
-        <Side>4</Side>
     </Wall>
 </Pattern>

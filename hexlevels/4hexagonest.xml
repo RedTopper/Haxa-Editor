@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Level>
     <Name>HEXAGONEST</Name>
-    <Difficulty>HARDEST</Difficulty>
+    <Difficulty>HARDESTESTER</Difficulty>
     <Mode>FAMILIAR</Mode>
     <Creator>REDHAT</Creator>
     <Music>callMeKatla.wav</Music>
@@ -9,17 +9,6 @@
     <SpeedRotation>0.048332196</SpeedRotation>
     <SpeedCursor>0.15707964</SpeedCursor>
     <SpeedPulse>90</SpeedPulse>
-    <LinkedPatterns>
-        <Pattern>o6_3wall.xml</Pattern>
-        <Pattern>o6_4wall.xml</Pattern>
-        <Pattern>o6_5wall.xml</Pattern>
-        <Pattern>o6_quickshift.xml</Pattern>
-        <Pattern>o6_reverse(x2).xml</Pattern>
-        <Pattern>o6_llrrr.xml</Pattern>
-        <Pattern>o6_point.xml</Pattern>
-        <Pattern>o6_turnaround.xml</Pattern>
-        <Pattern>o6_5pinreversal.xml</Pattern>
-    </LinkedPatterns>
     <BackgroundColorOne>
         <Color>
             <Red>102</Red>
@@ -131,4 +120,15 @@
             <Blue>204</Blue>
         </Color>
     </ForegroundColor>
+    <LinkedPatterns>
+        <Pattern>o6_3wall.xml</Pattern>
+        <Pattern>o6_4wall.xml</Pattern>
+        <Pattern>o6_5wall.xml</Pattern>
+        <Pattern>o6_quickshift.xml</Pattern>
+        <Pattern>o6_reverse(x2).xml</Pattern>
+        <Pattern>o6_llrrr.xml</Pattern>
+        <Pattern>o6_point.xml</Pattern>
+        <Pattern>o6_turnaround.xml</Pattern>
+        <Pattern>o6_5pinreversal.xml</Pattern>
+    </LinkedPatterns>
 </Level>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Level>
-    <Name>WHITEOUT</Name>
+    <Name>BLACKOUT</Name>
     <Difficulty>BONUS</Difficulty>
     <Mode>FLASHY</Mode>
     <Creator>REDHAT</Creator>
@@ -9,78 +9,16 @@
     <SpeedRotation>0.02</SpeedRotation>
     <SpeedCursor>0.10471976</SpeedCursor>
     <SpeedPulse>10</SpeedPulse>
-    <LinkedPatterns>
-        <Pattern>o3l_flipping.xml</Pattern>
-        <Pattern>o3l_one.xml</Pattern>
-        <Pattern>o3l_two.xml</Pattern>
-        <Pattern>o3l_twov2.xml</Pattern>
-        <Pattern>o4l_cube.xml</Pattern>
-    </LinkedPatterns>
     <BackgroundColorOne>
         <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
         </Color>
         <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-        </Color>
-        <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-        </Color>
-        <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-        </Color>
-        <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-        </Color>
-        <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-        </Color>
-        <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-        </Color>
-        <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-        </Color>
-        <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-        </Color>
-        <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-        </Color>
-        <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-        </Color>
-        <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
-        </Color>
-        <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
         </Color>
         <Color>
             <Red>0</Red>
@@ -91,13 +29,88 @@
             <Red>0</Red>
             <Green>0</Green>
             <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+        </Color>
+        <Color>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
         </Color>
     </BackgroundColorOne>
     <BackgroundColorTwo>
         <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
         </Color>
         <Color>
             <Red>255</Red>
@@ -110,54 +123,54 @@
             <Blue>255</Blue>
         </Color>
         <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
         </Color>
         <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
         </Color>
         <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
         </Color>
         <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
         </Color>
         <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
         </Color>
         <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
         </Color>
         <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
         </Color>
         <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
         </Color>
         <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
         </Color>
         <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
         </Color>
         <Color>
             <Red>0</Red>
@@ -172,9 +185,16 @@
     </BackgroundColorTwo>
     <ForegroundColor>
         <Color>
-            <Red>242</Red>
-            <Green>242</Green>
-            <Blue>242</Blue>
+            <Red>7</Red>
+            <Green>7</Green>
+            <Blue>7</Blue>
         </Color>
     </ForegroundColor>
+    <LinkedPatterns>
+        <Pattern>o3l_flipping.xml</Pattern>
+        <Pattern>o3l_one.xml</Pattern>
+        <Pattern>o3l_two.xml</Pattern>
+        <Pattern>o3l_twov2.xml</Pattern>
+        <Pattern>o4l_cube.xml</Pattern>
+    </LinkedPatterns>
 </Level>
