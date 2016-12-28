@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Level>
-    <Name>OCTOGONER</Name>
-    <Difficulty>HARDESTEST</Difficulty>
+    <Name>OCTOGON</Name>
+    <Difficulty>HARDESTER</Difficulty>
     <Mode>OCTOGON</Mode>
     <Creator>REDHAT</Creator>
     <Music>captainCool.wav</Music>
     <SpeedWall>2.3</SpeedWall>
-    <SpeedRotation>0.034906585</SpeedRotation>
+    <SpeedRotation>0.0418879</SpeedRotation>
     <SpeedCursor>0.12566371</SpeedCursor>
     <SpeedPulse>80</SpeedPulse>
     <BackgroundColorOne>

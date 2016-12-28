@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Level>
-    <Name>HEXAGONEST</Name>
-    <Difficulty>HARDESTESTER</Difficulty>
+    <Name>HEXAGONER</Name>
+    <Difficulty>HARDESTEST</Difficulty>
     <Mode>FAMILIAR</Mode>
     <Creator>REDHAT</Creator>
-    <Music>callMeKatla.wav</Music>
+    <Music>jackRussel.wav</Music>
     <SpeedWall>2.5</SpeedWall>
-    <SpeedRotation>0.048332196</SpeedRotation>
+    <SpeedRotation>0.05235988</SpeedRotation>
     <SpeedCursor>0.15707964</SpeedCursor>
     <SpeedPulse>90</SpeedPulse>
     <BackgroundColorOne>

@@ -4,10 +4,10 @@
     <Difficulty>HARDEST</Difficulty>
     <Mode>NORMAL</Mode>
     <Creator>REDHAT</Creator>
-    <Music>NONE</Music>
-    <SpeedWall>2.0</SpeedWall>
-    <SpeedRotation>0.05235988</SpeedRotation>
-    <SpeedCursor>0.10471976</SpeedCursor>
+    <Music>commandoSteve.wav</Music>
+    <SpeedWall>2.3</SpeedWall>
+    <SpeedRotation>0.034906585</SpeedRotation>
+    <SpeedCursor>0.120830484</SpeedCursor>
     <SpeedPulse>60</SpeedPulse>
     <BackgroundColorOne>
         <Color>
@@ -52,5 +52,8 @@
     </ForegroundColor>
     <LinkedPatterns>
         <Pattern>o6_lllll.xml</Pattern>
+        <Pattern>o6_deathwish.xml</Pattern>
+        <Pattern>o5_reverse.xml</Pattern>
+        <Pattern>o5_3wall(x3).xml</Pattern>
     </LinkedPatterns>
 </Level>
