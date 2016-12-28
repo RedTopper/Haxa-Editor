@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Level>
+    <Name>BEGINNERAGON</Name>
+    <Difficulty>MEDIUM</Difficulty>
+    <Mode>NORMAL</Mode>
+    <Creator>JASON</Creator>
+    <Music>NONE</Music>
+    <SpeedWall>2.0</SpeedWall>
+    <SpeedRotation>0.028559932</SpeedRotation>
+    <SpeedCursor>0.10471976</SpeedCursor>
+    <SpeedPulse>120</SpeedPulse>
+    <BackgroundColorOne>
+        <Color>
+            <Red>34</Red>
+            <Green>112</Green>
+            <Blue>220</Blue>
+        </Color>
+    </BackgroundColorOne>
+    <BackgroundColorTwo>
+        <Color>
+            <Red>0</Red>
+            <Green>160</Green>
+            <Blue>20</Blue>
+        </Color>
+    </BackgroundColorTwo>
+    <ForegroundColor>
+        <Color>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+        </Color>
+    </ForegroundColor>
+    <LinkedPatterns>
+        <Pattern>Jason_Main_Hexa.xml</Pattern>
+        <Pattern>Jason_Maze.xml</Pattern>
+        <Pattern>Jason_Offset_Hexa.xml</Pattern>
+        <Pattern>o6_spiral.xml</Pattern>
+        <Pattern>Jason_Hexa_Dodge.xml</Pattern>
+    </LinkedPatterns>
+</Level>
