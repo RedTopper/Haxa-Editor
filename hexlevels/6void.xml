@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Level>
+    <Name>VOID</Name>
+    <Difficulty>???</Difficulty>
+    <Mode>???</Mode>
+    <Creator>REDHAT</Creator>
+    <Music>darkWizards.wav</Music>
+    <SpeedWall>3.0</SpeedWall>
+    <SpeedRotation>0.0</SpeedRotation>
+    <SpeedCursor>0.10471976</SpeedCursor>
+    <SpeedPulse>120</SpeedPulse>
+    <BackgroundColorOne>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+    </BackgroundColorOne>
+    <BackgroundColorTwo>
+        <Color>
+            <Red>0</Red>
+            <Green>0</Green>
+            <Blue>0</Blue>
+        </Color>
+    </BackgroundColorTwo>
+    <ForegroundColor>
+        <Color>
+            <Red>255</Red>
+            <Green>255</Green>
+            <Blue>255</Blue>
+        </Color>
+    </ForegroundColor>
+    <LinkedPatterns>
+        <Pattern>o6_3wall.xml</Pattern>
+    </LinkedPatterns>
+</Level>
