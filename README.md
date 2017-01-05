@@ -1,4 +1,4 @@
 # Haxa-Editor
 LevelEditor for Super Hexagon (https://github.com/RedInquisitive/Super-Haxagon)
 
-More information coming soon!
+Head on over to the wiki for more information!
