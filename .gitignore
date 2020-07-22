@@ -1,3 +1,4 @@
+/out/
 /bin/
 /hexlevels/backup
 /hexlevels/patterns/backup
@@ -5,3 +6,5 @@
 /levels.xml
 /.project
 /.classpath
+/.idea
+/*.haxagon

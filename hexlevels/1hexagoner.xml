@@ -4,7 +4,7 @@
     <Difficulty>HARDER</Difficulty>
     <Mode>NORMAL</Mode>
     <Creator>REDHAT</Creator>
-    <Music>mazeOfMayonnaise.wav</Music>
+    <Music>mazeOfMayonnaise</Music>
     <SpeedWall>1.9</SpeedWall>
     <SpeedRotation>0.024166098</SpeedRotation>
     <SpeedCursor>0.11423973</SpeedCursor>

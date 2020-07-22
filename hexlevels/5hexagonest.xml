@@ -4,7 +4,7 @@
     <Difficulty>HARDESTESTEST</Difficulty>
     <Mode>SPINNY</Mode>
     <Creator>REDHAT</Creator>
-    <Music>callMeKatla.wav</Music>
+    <Music>callMeKatla</Music>
     <SpeedWall>2.6</SpeedWall>
     <SpeedRotation>0.06283186</SpeedRotation>
     <SpeedCursor>0.17951958</SpeedCursor>
