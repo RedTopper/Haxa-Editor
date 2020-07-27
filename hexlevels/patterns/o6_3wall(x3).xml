@@ -17,18 +17,33 @@
         <Side>4</Side>
     </Wall>
     <Wall>
-        <Distance>36</Distance>
+        <Distance>32</Distance>
         <Height>16</Height>
-        <Side>1</Side>
+        <Side>0</Side>
     </Wall>
     <Wall>
-        <Distance>36</Distance>
+        <Distance>32</Distance>
         <Height>16</Height>
-        <Side>3</Side>
+        <Side>2</Side>
     </Wall>
     <Wall>
-        <Distance>36</Distance>
+        <Distance>32</Distance>
         <Height>16</Height>
-        <Side>5</Side>
+        <Side>4</Side>
+    </Wall>
+    <Wall>
+        <Distance>64</Distance>
+        <Height>16</Height>
+        <Side>0</Side>
+    </Wall>
+    <Wall>
+        <Distance>64</Distance>
+        <Height>16</Height>
+        <Side>2</Side>
+    </Wall>
+    <Wall>
+        <Distance>64</Distance>
+        <Height>16</Height>
+        <Side>4</Side>
     </Wall>
 </Pattern>

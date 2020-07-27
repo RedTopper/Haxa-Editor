@@ -9,6 +9,7 @@
     <SpeedRotation>0.06283186</SpeedRotation>
     <SpeedCursor>0.17951958</SpeedCursor>
     <SpeedPulse>22</SpeedPulse>
+    <Next>6</Next>
     <BackgroundColorOne>
         <Color>
             <Red>101</Red>
@@ -81,7 +82,6 @@
         <Pattern>o6_4wall.xml</Pattern>
         <Pattern>o6_5pinreversal.xml</Pattern>
         <Pattern>o6_5pinreversaleasy.xml</Pattern>
-        <Pattern>o6_5wall.xml</Pattern>
         <Pattern>o6_arc.xml</Pattern>
         <Pattern>o6_deathwish.xml</Pattern>
         <Pattern>o6_llrrr.xml</Pattern>
@@ -94,5 +94,7 @@
         <Pattern>o6_spiral.xml</Pattern>
         <Pattern>o6_stack.xml</Pattern>
         <Pattern>o6_turnaround.xml</Pattern>
+        <Pattern>o6_5wallnohold.xml</Pattern>
+        <Pattern>o6_fastwall.xml</Pattern>
     </LinkedPatterns>
 </Level>

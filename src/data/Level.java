@@ -33,7 +33,7 @@ public class Level {
 	
 	//Files
 	public static final String XML_HEADER = "Level";
-	public static final String BIN_HEADER = "LEV2.1";
+	public static final String BIN_HEADER = "LEV2.2";
 	public static final String BIN_FOOTER = "ENDLEV";
 	
 	//Finals
@@ -69,6 +69,7 @@ public class Level {
 	public static final String XML_MODE = "Mode";
 	public static final String XML_CREATOR = "Creator";
 	public static final String XML_MUSIC = "Music";
+	public static final String XML_NEXT_INDEX = "Next";
 	public static final String XML_BG1 = "BackgroundColorOne";
 	public static final String XML_BG2 = "BackgroundColorTwo";
 	public static final String XML_FG = "ForegroundColor";
@@ -87,6 +88,7 @@ public class Level {
 	private float speedRotation;
 	private float speedCursor;
 	private int speedPulse;
+	private int nextIndex;
 	private List<Color> bg1;
 	private List<Color> bg2;
 	private List<Color> fg;
@@ -98,6 +100,7 @@ public class Level {
 		this.mode 			= "NORMAL";
 		this.creator 		= "ANONYMOUS";
 		this.music 			= "NONE";
+		this.nextIndex		= -1;
 		this.speedWall 		= 2.0f;
 		this.speedRotation 	= (float)(Math.PI  * 2.0) / 120.0f;
 		this.speedCursor	= (float)(Math.PI  * 2.0) / 60.0f;
@@ -121,6 +124,7 @@ public class Level {
 		this.speedRotation 	= UtilXML.getFloat(e, XML_SPEED_ROTATION);
 		this.speedCursor	= UtilXML.getFloat(e, XML_SPEED_CURSOR);
 		this.speedPulse 	= UtilXML.getInt(e, XML_SPEED_PULSE);
+		this.nextIndex 		= UtilXML.getInt(e, XML_NEXT_INDEX);
 		this.bg1			= UtilXML.getColors(e, XML_BG1);
 		this.bg2			= UtilXML.getColors(e, XML_BG2);
 		this.fg				= UtilXML.getColors(e, XML_FG);
@@ -137,6 +141,7 @@ public class Level {
 		UtilXML.putFloat(e, XML_SPEED_ROTATION, speedRotation);
 		UtilXML.putFloat(e, XML_SPEED_CURSOR, speedCursor);
 		UtilXML.putInt(e, XML_SPEED_PULSE, speedPulse);
+		UtilXML.putInt(e, XML_NEXT_INDEX, nextIndex);
 		UtilXML.putColors(e, XML_BG1, bg1);
 		UtilXML.putColors(e, XML_BG2, bg2);
 		UtilXML.putColors(e, XML_FG, fg);
@@ -159,6 +164,7 @@ public class Level {
 		d.putFloat(speedRotation);
 		d.putFloat(speedCursor);
 		d.putInt(speedPulse);
+		d.putInt(nextIndex);
 		d.putInt(patterns.size());
 		for(Pattern p : patterns) d.putString(p.toString());
 		d.putRawString(BIN_FOOTER);
@@ -185,11 +191,12 @@ public class Level {
 		JTextField jDIFF = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Difficulty", difficulty);
 		JTextField jMODE = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Mode", mode);
 		JTextField jCREA = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Creator", creator);
-		JTextField jMUSE = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Music File + extension", music);
+		JTextField jMUSE = Util.addTitledFieldToPanel(textConfiguration, null, "[String] Music File", music);
 		JTextField jWALL = Util.addTitledFieldToPanel(textConfiguration, null, "[float] Wall Speed", speedWall + "");
 		JTextField jROTA = Util.addTitledFieldToPanel(textConfiguration, null, "[TAU/float] Rotation Step", speedRotation + "");
 		JTextField jCURS = Util.addTitledFieldToPanel(textConfiguration, null, "[TAU/float] Human Step", speedCursor + "");
-		JTextField jPLUS = Util.addTitledFieldToPanel(textConfiguration, null, "[float] Pulse Speed", speedPulse + "");
+		JTextField jPLUS = Util.addTitledFieldToPanel(textConfiguration, null, "[int] Pulse Speed", speedPulse + "");
+		JTextField jNEXT = Util.addTitledFieldToPanel(textConfiguration, null, "[int] Next Level Index", nextIndex + "");
 		JButton jSAVE = Util.addButtonToPanel(textConfiguration, null, "Save Configuration");
 		frame.add(textConfiguration);
 		
@@ -231,6 +238,7 @@ public class Level {
 					speedRotation 	= Float.parseFloat(jROTA.getText());
 					speedCursor 	= Float.parseFloat(jCURS.getText());
 					speedPulse 		= Integer.parseInt(jPLUS.getText());
+					nextIndex 		= Integer.parseInt(jNEXT.getText());
 					if(Util.askSave(frame) != JOptionPane.YES_OPTION) return;
 					Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 					Element el = doc.createElement(XML_HEADER);

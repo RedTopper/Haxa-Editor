@@ -32,52 +32,52 @@
         <Side>3</Side>
     </Wall>
     <Wall>
-        <Distance>64</Distance>
+        <Distance>80</Distance>
         <Height>32</Height>
         <Side>2</Side>
     </Wall>
     <Wall>
-        <Distance>64</Distance>
+        <Distance>80</Distance>
         <Height>32</Height>
         <Side>5</Side>
     </Wall>
     <Wall>
-        <Distance>56</Distance>
+        <Distance>72</Distance>
         <Height>16</Height>
         <Side>1</Side>
     </Wall>
     <Wall>
-        <Distance>56</Distance>
+        <Distance>72</Distance>
         <Height>16</Height>
         <Side>4</Side>
     </Wall>
     <Wall>
-        <Distance>88</Distance>
+        <Distance>104</Distance>
         <Height>16</Height>
         <Side>1</Side>
     </Wall>
     <Wall>
-        <Distance>88</Distance>
+        <Distance>104</Distance>
         <Height>16</Height>
         <Side>4</Side>
     </Wall>
     <Wall>
-        <Distance>120</Distance>
+        <Distance>152</Distance>
         <Height>32</Height>
         <Side>0</Side>
     </Wall>
     <Wall>
-        <Distance>120</Distance>
+        <Distance>152</Distance>
         <Height>32</Height>
         <Side>3</Side>
     </Wall>
     <Wall>
-        <Distance>120</Distance>
+        <Distance>152</Distance>
         <Height>32</Height>
         <Side>2</Side>
     </Wall>
     <Wall>
-        <Distance>120</Distance>
+        <Distance>152</Distance>
         <Height>32</Height>
         <Side>5</Side>
     </Wall>

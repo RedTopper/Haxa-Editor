@@ -8,7 +8,7 @@ import red.UtilXML;
 public class Wall {
 	
 	//Globals
-	public static final int MIN_DISTANCE = 80;
+	public static final int MIN_DISTANCE = 72;
 	
 	//XML
 	public static final String XML_HEADER= "Wall";

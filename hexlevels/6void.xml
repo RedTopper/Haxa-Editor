@@ -9,6 +9,7 @@
     <SpeedRotation>0.0</SpeedRotation>
     <SpeedCursor>0.17951958</SpeedCursor>
     <SpeedPulse>120</SpeedPulse>
+    <Next>-1</Next>
     <BackgroundColorOne>
         <Color>
             <Red>0</Red>

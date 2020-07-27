@@ -5,55 +5,74 @@
     <Mode>NORMAL</Mode>
     <Creator>REDHAT</Creator>
     <Music>commandoSteve</Music>
-    <SpeedWall>2.3</SpeedWall>
+    <SpeedWall>2.4</SpeedWall>
     <SpeedRotation>0.034906585</SpeedRotation>
     <SpeedCursor>0.120830484</SpeedCursor>
     <SpeedPulse>60</SpeedPulse>
+    <Next>5</Next>
     <BackgroundColorOne>
         <Color>
-            <Red>224</Red>
-            <Green>99</Green>
-            <Blue>0</Blue>
+            <Red>0</Red>
+            <Green>72</Green>
+            <Blue>43</Blue>
         </Color>
         <Color>
-            <Red>255</Red>
-            <Green>149</Green>
-            <Blue>65</Blue>
+            <Red>15</Red>
+            <Green>83</Green>
+            <Blue>74</Blue>
         </Color>
         <Color>
-            <Red>255</Red>
-            <Green>193</Green>
-            <Blue>65</Blue>
+            <Red>0</Red>
+            <Green>68</Green>
+            <Blue>30</Blue>
         </Color>
     </BackgroundColorOne>
     <BackgroundColorTwo>
         <Color>
             <Red>0</Red>
-            <Green>136</Green>
-            <Blue>131</Blue>
+            <Green>94</Green>
+            <Blue>58</Blue>
         </Color>
         <Color>
-            <Red>41</Red>
-            <Green>161</Green>
-            <Blue>156</Blue>
+            <Red>15</Red>
+            <Green>104</Green>
+            <Blue>93</Blue>
         </Color>
         <Color>
-            <Red>59</Red>
-            <Green>93</Green>
-            <Blue>177</Blue>
+            <Red>0</Red>
+            <Green>88</Green>
+            <Blue>41</Blue>
         </Color>
     </BackgroundColorTwo>
     <ForegroundColor>
         <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>255</Blue>
+            <Red>1</Red>
+            <Green>254</Green>
+            <Blue>156</Blue>
+        </Color>
+        <Color>
+            <Red>16</Red>
+            <Green>253</Green>
+            <Blue>224</Blue>
+        </Color>
+        <Color>
+            <Red>1</Red>
+            <Green>238</Green>
+            <Blue>110</Blue>
         </Color>
     </ForegroundColor>
     <LinkedPatterns>
         <Pattern>o6_lllll.xml</Pattern>
         <Pattern>o6_deathwish.xml</Pattern>
-        <Pattern>o5_reverse.xml</Pattern>
-        <Pattern>o5_3wall(x3).xml</Pattern>
+        <Pattern>o6_turnaround.xml</Pattern>
+        <Pattern>o6_reverse(x2).xml</Pattern>
+        <Pattern>o6_quickshift.xml</Pattern>
+        <Pattern>o6_reallyquickshift.xml</Pattern>
+        <Pattern>o6_lotsofwalls.xml</Pattern>
+        <Pattern>o6_arc.xml</Pattern>
+        <Pattern>o6_5wall.xml</Pattern>
+        <Pattern>o6_4wall.xml</Pattern>
+        <Pattern>o6_3wall(x2).xml</Pattern>
+        <Pattern>o6_turnaround.xml</Pattern>
     </LinkedPatterns>
 </Level>

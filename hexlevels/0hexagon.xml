@@ -9,6 +9,7 @@
     <SpeedRotation>0.02094395</SpeedRotation>
     <SpeedCursor>0.10471976</SpeedCursor>
     <SpeedPulse>120</SpeedPulse>
+    <Next>3</Next>
     <BackgroundColorOne>
         <Color>
             <Red>90</Red>
@@ -56,5 +57,8 @@
         <Pattern>o6_quickshift.xml</Pattern>
         <Pattern>o6_spiral.xml</Pattern>
         <Pattern>o6_stack.xml</Pattern>
+        <Pattern>o6_easyshift.xml</Pattern>
+        <Pattern>o6_reverse.xml</Pattern>
+        <Pattern>o6_3wall(x3).xml</Pattern>
     </LinkedPatterns>
 </Level>
