@@ -5,60 +5,60 @@
     <Mode>NORMAL</Mode>
     <Creator>REDHAT</Creator>
     <Music>commandoSteve</Music>
-    <SpeedWall>2.4</SpeedWall>
+    <SpeedWall>2.2</SpeedWall>
     <SpeedRotation>0.034906585</SpeedRotation>
     <SpeedCursor>0.120830484</SpeedCursor>
     <SpeedPulse>60</SpeedPulse>
     <Next>5</Next>
     <BackgroundColorOne>
         <Color>
-            <Red>0</Red>
-            <Green>72</Green>
-            <Blue>43</Blue>
+            <Red>49</Red>
+            <Green>0</Green>
+            <Blue>122</Blue>
         </Color>
         <Color>
-            <Red>15</Red>
-            <Green>83</Green>
-            <Blue>74</Blue>
+            <Red>51</Red>
+            <Green>15</Green>
+            <Blue>83</Blue>
         </Color>
         <Color>
-            <Red>0</Red>
-            <Green>68</Green>
-            <Blue>30</Blue>
+            <Red>28</Red>
+            <Green>0</Green>
+            <Blue>68</Blue>
         </Color>
     </BackgroundColorOne>
     <BackgroundColorTwo>
         <Color>
-            <Red>0</Red>
-            <Green>94</Green>
-            <Blue>58</Blue>
+            <Red>60</Red>
+            <Green>0</Green>
+            <Blue>142</Blue>
         </Color>
         <Color>
-            <Red>15</Red>
-            <Green>104</Green>
-            <Blue>93</Blue>
+            <Red>62</Red>
+            <Green>15</Green>
+            <Blue>104</Blue>
         </Color>
         <Color>
-            <Red>0</Red>
-            <Green>88</Green>
-            <Blue>41</Blue>
+            <Red>38</Red>
+            <Green>0</Green>
+            <Blue>88</Blue>
         </Color>
     </BackgroundColorTwo>
     <ForegroundColor>
         <Color>
-            <Red>1</Red>
-            <Green>254</Green>
-            <Blue>156</Blue>
+            <Red>120</Red>
+            <Green>17</Green>
+            <Blue>255</Blue>
         </Color>
         <Color>
-            <Red>16</Red>
-            <Green>253</Green>
-            <Blue>224</Blue>
+            <Red>142</Red>
+            <Green>16</Green>
+            <Blue>253</Blue>
         </Color>
         <Color>
-            <Red>1</Red>
-            <Green>238</Green>
-            <Blue>110</Blue>
+            <Red>107</Red>
+            <Green>0</Green>
+            <Blue>238</Blue>
         </Color>
     </ForegroundColor>
     <LinkedPatterns>

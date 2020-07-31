@@ -12,53 +12,23 @@
     <Next>5</Next>
     <BackgroundColorOne>
         <Color>
-            <Red>0</Red>
-            <Green>102</Green>
+            <Red>3</Red>
+            <Green>16</Green>
             <Blue>0</Blue>
-        </Color>
-        <Color>
-            <Red>0</Red>
-            <Green>204</Green>
-            <Blue>102</Blue>
         </Color>
     </BackgroundColorOne>
     <BackgroundColorTwo>
         <Color>
-            <Red>51</Red>
-            <Green>51</Green>
-            <Blue>51</Blue>
-        </Color>
-        <Color>
-            <Red>102</Red>
-            <Green>102</Green>
-            <Blue>102</Blue>
-        </Color>
-        <Color>
-            <Red>153</Red>
-            <Green>153</Green>
-            <Blue>255</Blue>
+            <Red>5</Red>
+            <Green>24</Green>
+            <Blue>0</Blue>
         </Color>
     </BackgroundColorTwo>
     <ForegroundColor>
         <Color>
-            <Red>204</Red>
-            <Green>204</Green>
-            <Blue>255</Blue>
-        </Color>
-        <Color>
-            <Red>255</Red>
-            <Green>204</Green>
-            <Blue>204</Blue>
-        </Color>
-        <Color>
-            <Red>255</Red>
-            <Green>255</Green>
-            <Blue>204</Blue>
-        </Color>
-        <Color>
-            <Red>204</Red>
-            <Green>255</Green>
-            <Blue>204</Blue>
+            <Red>68</Red>
+            <Green>160</Green>
+            <Blue>7</Blue>
         </Color>
     </ForegroundColor>
     <LinkedPatterns>
