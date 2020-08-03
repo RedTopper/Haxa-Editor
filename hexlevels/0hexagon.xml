@@ -10,6 +10,7 @@
     <SpeedCursor>0.10471976</SpeedCursor>
     <SpeedPulse>120</SpeedPulse>
     <Next>3</Next>
+    <NextTime>90.0</NextTime>
     <BackgroundColorOne>
         <Color>
             <Red>90</Red>

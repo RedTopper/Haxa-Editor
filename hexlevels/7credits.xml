@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Level>
-    <Name>VOID</Name>
-    <Difficulty>???</Difficulty>
-    <Mode>???</Mode>
+    <Name>CREDITS</Name>
+    <Difficulty>SPOILERS</Difficulty>
+    <Mode>(DUH)</Mode>
     <Creator>REDHAT</Creator>
-    <Music>screenSaver</Music>
-    <SpeedWall>3.2</SpeedWall>
+    <Music>NONE</Music>
+    <SpeedWall>2.0</SpeedWall>
     <SpeedRotation>0.0</SpeedRotation>
-    <SpeedCursor>0.17951958</SpeedCursor>
+    <SpeedCursor>0.10471976</SpeedCursor>
     <SpeedPulse>120</SpeedPulse>
     <Next>-1</Next>
-    <NextTime>0.0</NextTime>
+    <NextTime>90.0</NextTime>
     <BackgroundColorOne>
         <Color>
             <Red>0</Red>
@@ -33,17 +33,6 @@
         </Color>
     </ForegroundColor>
     <LinkedPatterns>
-        <Pattern>o7_4wall.xml</Pattern>
-        <Pattern>o7_round.xml</Pattern>
-        <Pattern>o7_spiral.xml</Pattern>
-        <Pattern>o7_fall.xml</Pattern>
-        <Pattern>o7_push.xml</Pattern>
-        <Pattern>o8_arc.xml</Pattern>
-        <Pattern>o8_falls.xml</Pattern>
-        <Pattern>o8_spiral.xml</Pattern>
-        <Pattern>o8_tower.xml</Pattern>
-        <Pattern>o8_madness.xml</Pattern>
-        <Pattern>o7_solo.xml</Pattern>
-        <Pattern>o8_solo.xml</Pattern>
+        <Pattern>o6_kill.xml</Pattern>
     </LinkedPatterns>
 </Level>

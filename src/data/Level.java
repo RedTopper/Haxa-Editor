@@ -33,7 +33,7 @@ public class Level {
 	
 	//Files
 	public static final String XML_HEADER = "Level";
-	public static final String BIN_HEADER = "LEV2.2";
+	public static final String BIN_HEADER = "LEV3.0";
 	public static final String BIN_FOOTER = "ENDLEV";
 	
 	//Finals
@@ -70,6 +70,7 @@ public class Level {
 	public static final String XML_CREATOR = "Creator";
 	public static final String XML_MUSIC = "Music";
 	public static final String XML_NEXT_INDEX = "Next";
+	public static final String XML_NEXT_TIME = "NextTime";
 	public static final String XML_BG1 = "BackgroundColorOne";
 	public static final String XML_BG2 = "BackgroundColorTwo";
 	public static final String XML_FG = "ForegroundColor";
@@ -89,6 +90,7 @@ public class Level {
 	private float speedCursor;
 	private int speedPulse;
 	private int nextIndex;
+	private float nextTime;
 	private List<Color> bg1;
 	private List<Color> bg2;
 	private List<Color> fg;
@@ -101,6 +103,7 @@ public class Level {
 		this.creator 		= "ANONYMOUS";
 		this.music 			= "NONE";
 		this.nextIndex		= -1;
+		this.nextTime		= 90.0f;
 		this.speedWall 		= 2.0f;
 		this.speedRotation 	= (float)(Math.PI  * 2.0) / 120.0f;
 		this.speedCursor	= (float)(Math.PI  * 2.0) / 60.0f;
@@ -125,6 +128,7 @@ public class Level {
 		this.speedCursor	= UtilXML.getFloat(e, XML_SPEED_CURSOR);
 		this.speedPulse 	= UtilXML.getInt(e, XML_SPEED_PULSE);
 		this.nextIndex 		= UtilXML.getInt(e, XML_NEXT_INDEX);
+		this.nextTime 		= UtilXML.getFloat(e, XML_NEXT_TIME);
 		this.bg1			= UtilXML.getColors(e, XML_BG1);
 		this.bg2			= UtilXML.getColors(e, XML_BG2);
 		this.fg				= UtilXML.getColors(e, XML_FG);
@@ -142,6 +146,7 @@ public class Level {
 		UtilXML.putFloat(e, XML_SPEED_CURSOR, speedCursor);
 		UtilXML.putInt(e, XML_SPEED_PULSE, speedPulse);
 		UtilXML.putInt(e, XML_NEXT_INDEX, nextIndex);
+		UtilXML.putFloat(e, XML_NEXT_TIME, nextTime);
 		UtilXML.putColors(e, XML_BG1, bg1);
 		UtilXML.putColors(e, XML_BG2, bg2);
 		UtilXML.putColors(e, XML_FG, fg);
@@ -165,6 +170,7 @@ public class Level {
 		d.putFloat(speedCursor);
 		d.putInt(speedPulse);
 		d.putInt(nextIndex);
+		d.putFloat(nextTime);
 		d.putInt(patterns.size());
 		for(Pattern p : patterns) d.putString(p.toString());
 		d.putRawString(BIN_FOOTER);
@@ -197,6 +203,7 @@ public class Level {
 		JTextField jCURS = Util.addTitledFieldToPanel(textConfiguration, null, "[TAU/float] Human Step", speedCursor + "");
 		JTextField jPLUS = Util.addTitledFieldToPanel(textConfiguration, null, "[int] Pulse Speed", speedPulse + "");
 		JTextField jNEXT = Util.addTitledFieldToPanel(textConfiguration, null, "[int] Next Level Index", nextIndex + "");
+		JTextField jNTIM = Util.addTitledFieldToPanel(textConfiguration, null, "[float] Next Level Time", nextTime + "");
 		JButton jSAVE = Util.addButtonToPanel(textConfiguration, null, "Save Configuration");
 		frame.add(textConfiguration);
 		
@@ -239,6 +246,7 @@ public class Level {
 					speedCursor 	= Float.parseFloat(jCURS.getText());
 					speedPulse 		= Integer.parseInt(jPLUS.getText());
 					nextIndex 		= Integer.parseInt(jNEXT.getText());
+					nextTime 		= Float.parseFloat(jNTIM.getText());
 					if(Util.askSave(frame) != JOptionPane.YES_OPTION) return;
 					Document doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
 					Element el = doc.createElement(XML_HEADER);
