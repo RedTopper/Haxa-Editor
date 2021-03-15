@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Level>
-    <Name>HEXAGONEST</Name>
-    <Difficulty>HARDESTESTEST</Difficulty>
-    <Mode>SPINNY</Mode>
+    <Name>ZETA</Name>
+    <Difficulty>HEXAGON</Difficulty>
+    <Mode>SIDES 6</Mode>
     <Creator>REDHAT</Creator>
     <Music>callMeKatla</Music>
     <SpeedWall>2.6</SpeedWall>
@@ -78,24 +78,24 @@
         </Color>
     </ForegroundColor>
     <LinkedPatterns>
-        <Pattern>o6_3wall(x2).xml</Pattern>
-        <Pattern>o6_3wall.xml</Pattern>
-        <Pattern>o6_4wall.xml</Pattern>
-        <Pattern>o6_5pinreversal.xml</Pattern>
-        <Pattern>o6_5pinreversaleasy.xml</Pattern>
-        <Pattern>o6_arc.xml</Pattern>
-        <Pattern>o6_deathwish.xml</Pattern>
-        <Pattern>o6_llrrr.xml</Pattern>
-        <Pattern>o6_lotsofwalls.xml</Pattern>
-        <Pattern>o6_point.xml</Pattern>
-        <Pattern>o6_quickshift.xml</Pattern>
-        <Pattern>o6_reallyquickshift.xml</Pattern>
-        <Pattern>o6_reverse(x2).xml</Pattern>
-        <Pattern>o6_reverse.xml</Pattern>
-        <Pattern>o6_spiral.xml</Pattern>
-        <Pattern>o6_stack.xml</Pattern>
-        <Pattern>o6_turnaround.xml</Pattern>
-        <Pattern>o6_5wallnohold.xml</Pattern>
-        <Pattern>o6_fastwall.xml</Pattern>
+        <Pattern>6-wall-3-x2.xml</Pattern>
+        <Pattern>6-wall-3.xml</Pattern>
+        <Pattern>6-wall-4.xml</Pattern>
+        <Pattern>6-long-rlr-hard.xml</Pattern>
+        <Pattern>6-long-rlr.xml</Pattern>
+        <Pattern>6-wall-4-arc.xml</Pattern>
+        <Pattern>6-quick-rlrl.xml</Pattern>
+        <Pattern>6-gapped-llrrr.xml</Pattern>
+        <Pattern>6-gapped-lll-hard.xml</Pattern>
+        <Pattern>6-randomness.xml</Pattern>
+        <Pattern>6-rain-short.xml</Pattern>
+        <Pattern>6-rain-medium.xml</Pattern>
+        <Pattern>6-flip-3.xml</Pattern>
+        <Pattern>6-flip-2.xml</Pattern>
+        <Pattern>6-spiral.xml</Pattern>
+        <Pattern>6-stack.xml</Pattern>
+        <Pattern>6-reverse.xml</Pattern>
+        <Pattern>6-wall-5-no-hold.xml</Pattern>
+        <Pattern>6-wall-2-fast.xml</Pattern>
     </LinkedPatterns>
 </Level>

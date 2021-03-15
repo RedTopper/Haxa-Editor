@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Level>
-    <Name>OCTOGON</Name>
-    <Difficulty>HARDESTER</Difficulty>
-    <Mode>OCTOGON</Mode>
+    <Name>DELTA</Name>
+    <Difficulty>SQUARE</Difficulty>
+    <Mode>SIDES 8</Mode>
     <Creator>REDHAT</Creator>
     <Music>captainCool</Music>
     <SpeedWall>2.3</SpeedWall>
@@ -33,12 +33,12 @@
         </Color>
     </ForegroundColor>
     <LinkedPatterns>
-        <Pattern>o8_arc.xml</Pattern>
-        <Pattern>o8_falls.xml</Pattern>
-        <Pattern>o8_lrl.xml</Pattern>
-        <Pattern>o8_reverseWithTwoOpens.xml</Pattern>
-        <Pattern>o8_spiral.xml</Pattern>
-        <Pattern>o8_tower.xml</Pattern>
-        <Pattern>o8_twoflop.xml</Pattern>
+        <Pattern>8-wall-4-arc.xml</Pattern>
+        <Pattern>8-rain.xml</Pattern>
+        <Pattern>8-long-lrl.xml</Pattern>
+        <Pattern>8-flip-2-opens.xml</Pattern>
+        <Pattern>8-spiral-troll.xml</Pattern>
+        <Pattern>8-reverse-hard.xml</Pattern>
+        <Pattern>8-quick-lrlr.xml</Pattern>
     </LinkedPatterns>
 </Level>

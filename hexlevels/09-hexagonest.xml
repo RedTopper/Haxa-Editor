@@ -288,16 +288,16 @@
         </Color>
     </ForegroundColor>
     <LinkedPatterns>
-        <Pattern>o6_fastwall.xml</Pattern>
-        <Pattern>o6_3wall.xml</Pattern>
-        <Pattern>o6_4wall.xml</Pattern>
-        <Pattern>o6_reverse(x2).xml</Pattern>
-        <Pattern>o6_turnaround.xml</Pattern>
+        <Pattern>6-wall-2-fast.xml</Pattern>
+        <Pattern>6-wall-3.xml</Pattern>
+        <Pattern>6-wall-4.xml</Pattern>
+        <Pattern>6-flip-3.xml</Pattern>
+        <Pattern>6-reverse.xml</Pattern>
         <Pattern>o6_3wall_thicc.xml</Pattern>
         <Pattern>o6_spiral_double.xml</Pattern>
         <Pattern>o6_spiral_double_reverse.xml</Pattern>
         <Pattern>o6_rain.xml</Pattern>
-        <Pattern>o6_5pinreversaleasy.xml</Pattern>
-        <Pattern>o6_llrrr.xml</Pattern>
+        <Pattern>6-long-rlr.xml</Pattern>
+        <Pattern>6-gapped-llrrr.xml</Pattern>
     </LinkedPatterns>
 </Level>

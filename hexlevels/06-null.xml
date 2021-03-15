@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Level>
-    <Name>VOID</Name>
+    <Name>NULL</Name>
     <Difficulty>???</Difficulty>
     <Mode>???</Mode>
     <Creator>REDHAT</Creator>
@@ -33,17 +33,17 @@
         </Color>
     </ForegroundColor>
     <LinkedPatterns>
-        <Pattern>o7_4wall.xml</Pattern>
-        <Pattern>o7_round.xml</Pattern>
-        <Pattern>o7_spiral.xml</Pattern>
-        <Pattern>o7_fall.xml</Pattern>
-        <Pattern>o7_push.xml</Pattern>
-        <Pattern>o8_arc.xml</Pattern>
-        <Pattern>o8_falls.xml</Pattern>
-        <Pattern>o8_spiral.xml</Pattern>
-        <Pattern>o8_tower.xml</Pattern>
-        <Pattern>o8_madness.xml</Pattern>
-        <Pattern>o7_solo.xml</Pattern>
-        <Pattern>o8_solo.xml</Pattern>
+        <Pattern>7-wall-4.xml</Pattern>
+        <Pattern>7-spiral-mini.xml</Pattern>
+        <Pattern>7-spiral-troll.xml</Pattern>
+        <Pattern>7-rain.xml</Pattern>
+        <Pattern>7-quick-lrl-or-rlr.xml</Pattern>
+		<Pattern>7-lots-of-walls.xml</Pattern>
+        <Pattern>8-wall-4-arc.xml</Pattern>
+        <Pattern>8-rain.xml</Pattern>
+        <Pattern>8-spiral-troll.xml</Pattern>
+        <Pattern>8-reverse-hard.xml</Pattern>
+        <Pattern>8-long-hall.xml</Pattern>
+        <Pattern>8-rain-short.xml</Pattern>
     </LinkedPatterns>
 </Level>

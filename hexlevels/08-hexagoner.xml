@@ -44,12 +44,12 @@
     </ForegroundColor>
     <LinkedPatterns>
         <Pattern>o6_two.xml</Pattern>
-        <Pattern>o6_3wall.xml</Pattern>
-        <Pattern>o6_5pinreversaleasy.xml</Pattern>
-        <Pattern>o6_reverse(x2).xml</Pattern>
-        <Pattern>o6_deathwish.xml</Pattern>
+        <Pattern>6-wall-3.xml</Pattern>
+        <Pattern>6-long-rlr.xml</Pattern>
+        <Pattern>6-flip-3.xml</Pattern>
+        <Pattern>6-quick-rlrl.xml</Pattern>
         <Pattern>o6_3wall_thicc.xml</Pattern>
-        <Pattern>o6_stack.xml</Pattern>
-        <Pattern>o6_turnaround.xml</Pattern>
+        <Pattern>6-stack.xml</Pattern>
+        <Pattern>6-reverse.xml</Pattern>
     </LinkedPatterns>
 </Level>

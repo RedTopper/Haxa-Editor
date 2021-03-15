@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Level>
-    <Name>HEXAGONEST</Name>
-    <Difficulty>HARDEST</Difficulty>
-    <Mode>NORMAL</Mode>
+    <Name>GAMMA</Name>
+    <Difficulty>TRIANGLE</Difficulty>
+    <Mode>SIDES 6</Mode>
     <Creator>REDHAT</Creator>
     <Music>commandoSteve</Music>
     <SpeedWall>2.2</SpeedWall>
@@ -63,17 +63,16 @@
         </Color>
     </ForegroundColor>
     <LinkedPatterns>
-        <Pattern>o6_lllll.xml</Pattern>
-        <Pattern>o6_deathwish.xml</Pattern>
-        <Pattern>o6_turnaround.xml</Pattern>
-        <Pattern>o6_reverse(x2).xml</Pattern>
-        <Pattern>o6_quickshift.xml</Pattern>
-        <Pattern>o6_reallyquickshift.xml</Pattern>
-        <Pattern>o6_lotsofwalls.xml</Pattern>
-        <Pattern>o6_arc.xml</Pattern>
-        <Pattern>o6_5wall.xml</Pattern>
-        <Pattern>o6_4wall.xml</Pattern>
-        <Pattern>o6_3wall(x2).xml</Pattern>
-        <Pattern>o6_turnaround.xml</Pattern>
+        <Pattern>6-gapped-lllll.xml</Pattern>
+        <Pattern>6-quick-rlrl.xml</Pattern>
+        <Pattern>6-reverse.xml</Pattern>
+        <Pattern>6-flip-3.xml</Pattern>
+        <Pattern>6-rain-short.xml</Pattern>
+        <Pattern>6-rain-medium.xml</Pattern>
+        <Pattern>6-gapped-lll-hard.xml</Pattern>
+        <Pattern>6-wall-4-arc.xml</Pattern>
+        <Pattern>6-wall-5.xml</Pattern>
+        <Pattern>6-wall-4.xml</Pattern>
+        <Pattern>6-wall-3-x2.xml</Pattern>
     </LinkedPatterns>
 </Level>

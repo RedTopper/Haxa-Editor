@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Level>
-    <Name>HEXAGON</Name>
-    <Difficulty>HARD</Difficulty>
-    <Mode>FAMILIAR</Mode>
+    <Name>ALPHA</Name>
+    <Difficulty>POINT</Difficulty>
+    <Mode>SIDES 4-6</Mode>
     <Creator>REDHAT</Creator>
     <Music>drFinkelfracken</Music>
     <SpeedWall>1.7</SpeedWall>
@@ -48,18 +48,18 @@
         </Color>
     </ForegroundColor>
     <LinkedPatterns>
-        <Pattern>o5_3wall(x3).xml</Pattern>
-        <Pattern>o5_4wall.xml</Pattern>
-        <Pattern>o5_reverse.xml</Pattern>
-        <Pattern>o6_3wall(x2).xml</Pattern>
-        <Pattern>o6_3wall.xml</Pattern>
-        <Pattern>o6_4wall.xml</Pattern>
-        <Pattern>o6_5wall.xml</Pattern>
-        <Pattern>o6_quickshift.xml</Pattern>
-        <Pattern>o6_spiral.xml</Pattern>
-        <Pattern>o6_stack.xml</Pattern>
-        <Pattern>o6_easyshift.xml</Pattern>
-        <Pattern>o6_reverse.xml</Pattern>
-        <Pattern>o6_3wall(x3).xml</Pattern>
+        <Pattern>5-wall-3-x3.xml</Pattern>
+        <Pattern>5-wall-4.xml</Pattern>
+        <Pattern>5-reverse.xml</Pattern>
+        <Pattern>6-wall-3-x2.xml</Pattern>
+        <Pattern>6-wall-3.xml</Pattern>
+        <Pattern>6-wall-4.xml</Pattern>
+        <Pattern>6-wall-5.xml</Pattern>
+        <Pattern>6-rain-short.xml</Pattern>
+        <Pattern>6-spiral.xml</Pattern>
+        <Pattern>6-stack.xml</Pattern>
+        <Pattern>6-gapped-llll-easy.xml</Pattern>
+        <Pattern>6-flip-2.xml</Pattern>
+        <Pattern>6-wall-3-x3.xml</Pattern>
     </LinkedPatterns>
 </Level>
