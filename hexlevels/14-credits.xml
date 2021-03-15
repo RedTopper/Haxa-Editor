@@ -33,6 +33,6 @@
         </Color>
     </ForegroundColor>
     <LinkedPatterns>
-        <Pattern>o6_kill.xml</Pattern>
+        <Pattern>~-kill-always.xml</Pattern>
     </LinkedPatterns>
 </Level>

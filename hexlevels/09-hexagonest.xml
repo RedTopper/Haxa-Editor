@@ -9,8 +9,8 @@
     <SpeedRotation>0.034906585</SpeedRotation>
     <SpeedCursor>0.120830484</SpeedCursor>
     <SpeedPulse>45</SpeedPulse>
-    <Next>5</Next>
-    <NextTime>90.0</NextTime>
+    <Next>12</Next>
+    <NextTime>60.0</NextTime>
     <BackgroundColorOne>
         <Color>
             <Red>3</Red>
@@ -293,10 +293,6 @@
         <Pattern>6-wall-4.xml</Pattern>
         <Pattern>6-flip-3.xml</Pattern>
         <Pattern>6-reverse.xml</Pattern>
-        <Pattern>o6_3wall_thicc.xml</Pattern>
-        <Pattern>o6_spiral_double.xml</Pattern>
-        <Pattern>o6_spiral_double_reverse.xml</Pattern>
-        <Pattern>o6_rain.xml</Pattern>
         <Pattern>6-long-rlr.xml</Pattern>
         <Pattern>6-gapped-llrrr.xml</Pattern>
     </LinkedPatterns>

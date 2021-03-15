@@ -9,8 +9,8 @@
     <SpeedRotation>0.05235988</SpeedRotation>
     <SpeedCursor>0.15707964</SpeedCursor>
     <SpeedPulse>90</SpeedPulse>
-    <Next>5</Next>
-    <NextTime>90.0</NextTime>
+    <Next>12</Next>
+    <NextTime>120.0</NextTime>
     <BackgroundColorOne>
         <Color>
             <Red>102</Red>

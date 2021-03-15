@@ -5,12 +5,12 @@
     <Mode>ORIGINAL</Mode>
     <Creator>REDHAT</Creator>
     <Music>music1</Music>
-    <SpeedWall>2.0</SpeedWall>
-    <SpeedRotation>0.02094395</SpeedRotation>
-    <SpeedCursor>0.10471976</SpeedCursor>
-    <SpeedPulse>60</SpeedPulse>
-    <Next>3</Next>
-    <NextTime>120.0</NextTime>
+    <SpeedWall>1.8</SpeedWall>
+    <SpeedRotation>0.0149599</SpeedRotation>
+    <SpeedCursor>0.14</SpeedCursor>
+    <SpeedPulse>40</SpeedPulse>
+    <Next>10</Next>
+    <NextTime>10.0</NextTime>
     <BackgroundColorOne>
         <Color>
             <Red>62</Red>
@@ -48,22 +48,25 @@
         </Color>
     </ForegroundColor>
     <LinkedPatterns>
-        <Pattern>o6_two.xml</Pattern>
-        <Pattern>6-wall-3.xml</Pattern>
-        <Pattern>6-wall-4.xml</Pattern>
+        <Pattern>4-3-wall-hole.xml</Pattern>
+        <Pattern>4-3-wall.xml</Pattern>
+        <Pattern>4-3-wall.xml</Pattern>
+        <Pattern>4-reverse-2.xml</Pattern>
+        <Pattern>4-reverse.xml</Pattern>
+        <Pattern>4-spin.xml</Pattern>
+        <Pattern>5-reverse.xml</Pattern>
+        <Pattern>5-spin.xml</Pattern>
+        <Pattern>5-wall-2-x2.xml</Pattern>
+        <Pattern>5-wall-3-x2.xml</Pattern>
+        <Pattern>5-wall-4-x3.xml</Pattern>
+        <Pattern>5-wall-4.xml</Pattern>
         <Pattern>6-flip-2.xml</Pattern>
         <Pattern>6-flip-3.xml</Pattern>
-        <Pattern>5-wall-4.xml</Pattern>
-        <Pattern>o5_spin.xml</Pattern>
-        <Pattern>o5_2wall(x2).xml</Pattern>
-        <Pattern>o5_3wall(x2).xml</Pattern>
-        <Pattern>4-3-wall.xml</Pattern>
-        <Pattern>4-3-wall.xml</Pattern>
-        <Pattern>o4_cube_hole.xml</Pattern>
-        <Pattern>o4_cube_spin.xml</Pattern>
-        <Pattern>o5_4wall(x3).xml</Pattern>
-        <Pattern>5-reverse.xml</Pattern>
-        <Pattern>o6_5wall(x3).xml</Pattern>
         <Pattern>6-stack.xml</Pattern>
+        <Pattern>6-wall-2.xml</Pattern>
+        <Pattern>6-wall-3.xml</Pattern>
+        <Pattern>6-wall-4.xml</Pattern>
+        <Pattern>6-wall-5.xml</Pattern>
+        <Pattern>6-spiral.xml</Pattern>
     </LinkedPatterns>
 </Level>

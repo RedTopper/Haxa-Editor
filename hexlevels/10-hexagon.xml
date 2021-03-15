@@ -2,43 +2,71 @@
 <Level>
     <Name>HEXAGON</Name>
     <Difficulty>HARDESTER</Difficulty>
-    <Mode>HYPER</Mode>
+    <Mode>ORIGINAL</Mode>
     <Creator>REDHAT</Creator>
     <Music>music1</Music>
-    <SpeedWall>2.3</SpeedWall>
-    <SpeedRotation>0.0418879</SpeedRotation>
-    <SpeedCursor>0.12566371</SpeedCursor>
+    <SpeedWall>2.25</SpeedWall>
+    <SpeedRotation>0.028</SpeedRotation>
+    <SpeedCursor>0.14</SpeedCursor>
     <SpeedPulse>80</SpeedPulse>
-    <Next>5</Next>
-    <NextTime>90.0</NextTime>
+    <Next>11</Next>
+    <NextTime>120.0</NextTime>
     <BackgroundColorOne>
         <Color>
-            <Red>3</Red>
+            <Red>0</Red>
+            <Green>91</Green>
+            <Blue>103</Blue>
+        </Color>
+        <Color>
+            <Red>7</Red>
             <Green>16</Green>
-            <Blue>0</Blue>
+            <Blue>108</Blue>
         </Color>
     </BackgroundColorOne>
     <BackgroundColorTwo>
         <Color>
-            <Red>5</Red>
-            <Green>24</Green>
-            <Blue>0</Blue>
+            <Red>0</Red>
+            <Green>62</Green>
+            <Blue>67</Blue>
+        </Color>
+        <Color>
+            <Red>3</Red>
+            <Green>11</Green>
+            <Blue>71</Blue>
         </Color>
     </BackgroundColorTwo>
     <ForegroundColor>
         <Color>
-            <Red>68</Red>
-            <Green>160</Green>
-            <Blue>7</Blue>
+            <Red>10</Red>
+            <Green>165</Green>
+            <Blue>182</Blue>
+        </Color>
+        <Color>
+            <Red>64</Red>
+            <Green>69</Green>
+            <Blue>205</Blue>
         </Color>
     </ForegroundColor>
     <LinkedPatterns>
-        <Pattern>8-wall-4-arc.xml</Pattern>
-        <Pattern>8-rain.xml</Pattern>
-        <Pattern>8-long-lrl.xml</Pattern>
-        <Pattern>8-flip-2-opens.xml</Pattern>
-        <Pattern>8-spiral-troll.xml</Pattern>
-        <Pattern>8-reverse-hard.xml</Pattern>
-        <Pattern>8-quick-lrlr.xml</Pattern>
+        <Pattern>4-3-wall-hole.xml</Pattern>
+        <Pattern>4-3-wall.xml</Pattern>
+        <Pattern>4-3-wall.xml</Pattern>
+        <Pattern>4-reverse-2.xml</Pattern>
+        <Pattern>4-reverse.xml</Pattern>
+        <Pattern>4-spin.xml</Pattern>
+        <Pattern>5-reverse.xml</Pattern>
+        <Pattern>5-spin.xml</Pattern>
+        <Pattern>5-wall-2-x2.xml</Pattern>
+        <Pattern>5-wall-3-x2.xml</Pattern>
+        <Pattern>5-wall-4-x3.xml</Pattern>
+        <Pattern>5-wall-4.xml</Pattern>
+        <Pattern>6-flip-2.xml</Pattern>
+        <Pattern>6-flip-3.xml</Pattern>
+        <Pattern>6-stack.xml</Pattern>
+        <Pattern>6-wall-2.xml</Pattern>
+        <Pattern>6-wall-3.xml</Pattern>
+        <Pattern>6-wall-4.xml</Pattern>
+        <Pattern>6-wall-5.xml</Pattern>
+        <Pattern>6-reverse.xml</Pattern>
     </LinkedPatterns>
 </Level>
