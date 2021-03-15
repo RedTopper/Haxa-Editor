@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Level>
+    <Name>OCTOGON</Name>
+    <Difficulty>HARDESTER</Difficulty>
+    <Mode>OCTOGON</Mode>
+    <Creator>REDHAT</Creator>
+    <Music>captainCool</Music>
+    <SpeedWall>2.3</SpeedWall>
+    <SpeedRotation>0.0418879</SpeedRotation>
+    <SpeedCursor>0.12566371</SpeedCursor>
+    <SpeedPulse>80</SpeedPulse>
+    <Next>5</Next>
+    <NextTime>90.0</NextTime>
+    <BackgroundColorOne>
+        <Color>
+            <Red>3</Red>
+            <Green>16</Green>
+            <Blue>0</Blue>
+        </Color>
+    </BackgroundColorOne>
+    <BackgroundColorTwo>
+        <Color>
+            <Red>5</Red>
+            <Green>24</Green>
+            <Blue>0</Blue>
+        </Color>
+    </BackgroundColorTwo>
+    <ForegroundColor>
+        <Color>
+            <Red>68</Red>
+            <Green>160</Green>
+            <Blue>7</Blue>
+        </Color>
+    </ForegroundColor>
+    <LinkedPatterns>
+        <Pattern>o8_arc.xml</Pattern>
+        <Pattern>o8_falls.xml</Pattern>
+        <Pattern>o8_lrl.xml</Pattern>
+        <Pattern>o8_reverseWithTwoOpens.xml</Pattern>
+        <Pattern>o8_spiral.xml</Pattern>
+        <Pattern>o8_tower.xml</Pattern>
+        <Pattern>o8_twoflop.xml</Pattern>
+    </LinkedPatterns>
+</Level>
