@@ -8,18 +8,8 @@
     </Wall>
     <Wall>
         <Distance>0</Distance>
-        <Height>32</Height>
-        <Side>1</Side>
-    </Wall>
-    <Wall>
-        <Distance>0</Distance>
-        <Height>64</Height>
+        <Height>16</Height>
         <Side>2</Side>
-    </Wall>
-    <Wall>
-        <Distance>0</Distance>
-        <Height>32</Height>
-        <Side>3</Side>
     </Wall>
     <Wall>
         <Distance>0</Distance>
@@ -27,43 +17,63 @@
         <Side>4</Side>
     </Wall>
     <Wall>
-        <Distance>80</Distance>
-        <Height>48</Height>
+        <Distance>48</Distance>
+        <Height>16</Height>
+        <Side>1</Side>
+    </Wall>
+    <Wall>
+        <Distance>48</Distance>
+        <Height>16</Height>
+        <Side>3</Side>
+    </Wall>
+    <Wall>
+        <Distance>48</Distance>
+        <Height>16</Height>
         <Side>5</Side>
     </Wall>
     <Wall>
         <Distance>96</Distance>
-        <Height>32</Height>
+        <Height>16</Height>
         <Side>0</Side>
     </Wall>
     <Wall>
-        <Distance>112</Distance>
+        <Distance>96</Distance>
+        <Height>16</Height>
+        <Side>2</Side>
+    </Wall>
+    <Wall>
+        <Distance>96</Distance>
+        <Height>16</Height>
+        <Side>4</Side>
+    </Wall>
+    <Wall>
+        <Distance>144</Distance>
         <Height>16</Height>
         <Side>1</Side>
     </Wall>
     <Wall>
-        <Distance>96</Distance>
-        <Height>32</Height>
-        <Side>4</Side>
-    </Wall>
-    <Wall>
-        <Distance>112</Distance>
+        <Distance>144</Distance>
         <Height>16</Height>
         <Side>3</Side>
     </Wall>
     <Wall>
-        <Distance>160</Distance>
-        <Height>48</Height>
+        <Distance>144</Distance>
+        <Height>16</Height>
+        <Side>5</Side>
+    </Wall>
+    <Wall>
+        <Distance>192</Distance>
+        <Height>16</Height>
+        <Side>0</Side>
+    </Wall>
+    <Wall>
+        <Distance>192</Distance>
+        <Height>16</Height>
         <Side>2</Side>
     </Wall>
     <Wall>
         <Distance>192</Distance>
         <Height>16</Height>
-        <Side>1</Side>
-    </Wall>
-    <Wall>
-        <Distance>192</Distance>
-        <Height>16</Height>
-        <Side>3</Side>
+        <Side>4</Side>
     </Wall>
 </Pattern>
